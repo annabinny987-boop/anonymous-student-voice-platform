@@ -1,0 +1,14 @@
+# Maven build output
+target/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Files containing local secrets
+application-local.properties
+application-secrets.properties
+
+# Log files
+*.log

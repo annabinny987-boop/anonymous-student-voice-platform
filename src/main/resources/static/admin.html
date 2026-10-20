@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ASVP | Admin Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #111827, #312e81);
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            background: #ffffff;
+            padding: 38px;
+            border-radius: 18px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .icon {
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            background: #eef2ff;
+            border-radius: 18px;
+            font-size: 32px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e1b4b;
+            font-size: 27px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        label {
+            display: block;
+            margin: 18px 0 8px;
+            color: #334155;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: 2px solid #c7d2fe;
+            border-color: #4f46e5;
+        }
+
+        .login-button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            background: #4338ca;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background: #3730a3;
+        }
+
+        .login-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .message {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .error {
+            color: #b91c1c;
+        }
+
+        .success {
+            color: #15803d;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 25px;
+            text-align: center;
+            text-decoration: none;
+            color: #4338ca;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .security-note {
+            margin-top: 25px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+            text-align: center;
+            color: #64748b;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="login-card">
+
+    <div class="icon">🔐</div>
+
+    <h1>Admin Login</h1>
+
+    <p class="subtitle">
+        Anonymous Student Voice Platform<br>
+        Sign in to manage student concerns securely.
+    </p>
+
+    <form action="/login" method="post" id="loginForm">
+
+        <!-- Spring Security CSRF token -->
+        <input type="hidden" name="_csrf" id="csrfToken">
+
+        <label for="username">Admin Username</label>
+
+        <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your username"
+            autocomplete="username"
+            required
+            autofocus
+        >
+
+        <label for="password">Password</label>
+
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required
+        >
+
+        <button
+            type="submit"
+            class="login-button"
+            id="loginButton"
+            disabled
+        >
+            Loading secure login...
+        </button>
+
+        <p
+            class="message"
+            id="message"
+            role="status"
+            aria-live="polite"
+        ></p>
+
+    </form>
+
+    <a href="/" class="back-link">
+        ← Back to Student Homepage
+    </a>
+
+    <div class="security-note">
+        🔒 Authorized administrators only.<br>
+        Student information must remain confidential.
+    </div>
+
+</main>
+
+<script>
+    const csrfInput = document.getElementById("csrfToken");
+    const loginButton = document.getElementById("loginButton");
+    const message = document.getElementById("message");
+    const loginForm = document.getElementById("loginForm");
+
+    function showMessage(text, type) {
+        message.textContent = text;
+        message.className = "message " + type;
+    }
+
+    async function initializeLogin() {
+        loginButton.disabled = true;
+        loginButton.textContent = "Loading secure login...";
+
+        try {
+            const response = await fetch("/api/csrf", {
+                method: "GET",
+                credentials: "same-origin",
+                headers: {
+                    "Accept": "application/json"
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(
+                    "Server returned HTTP " + response.status
+                );
+            }
+
+            const data = await response.json();
+
+            if (!data.token) {
+                throw new Error("The server did not provide a CSRF token.");
+            }
+
+            csrfInput.value = data.token;
+
+            loginButton.disabled = false;
+            loginButton.textContent = "Sign In Securely";
+
+            message.textContent = "";
+
+        } catch (error) {
+            showMessage(
+                "Could not initialize secure login. " +
+                "Check the server and refresh this page.",
+                "error"
+            );
+
+            console.error("Login initialization failed:", error);
+        }
+    }
+
+    // Display login error or logout confirmation.
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.has("error")) {
+        showMessage(
+            "Incorrect username or password. Please try again.",
+            "error"
+        );
+    } else if (params.has("logout")) {
+        showMessage(
+            "You have been logged out successfully.",
+            "success"
+        );
+    }
+
+    // Ensure the form has a CSRF token before submitting.
+    loginForm.addEventListener("submit", function (event) {
+        if (!csrfInput.value) {
+            event.preventDefault();
+
+            showMessage(
+                "Security token is missing. Refresh the page and try again.",
+                "error"
+            );
+
+            return;
+        }
+
+        loginButton.disabled = true;
+        loginButton.textContent = "Signing in...";
+        message.textContent = "";
+    });
+
+    initializeLogin();
+</script>
+
+</body>
+</html>

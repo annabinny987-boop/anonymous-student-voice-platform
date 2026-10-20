@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ASVP | Admin Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        :root {
+            --primary: #3730a3;
+            --primary-light: #eef2ff;
+            --background: #f5f7fb;
+            --text: #172033;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --white: #ffffff;
+            --danger: #dc2626;
+            --success: #15803d;
+            --warning: #b45309;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 18px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .brand h1 {
+            font-size: 23px;
+            color: var(--primary);
+        }
+
+        .brand p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button, .button-link {
+            border: none;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .primary-button {
+            background: var(--primary);
+            color: white;
+        }
+
+        .primary-button:hover {
+            background: #312e81;
+        }
+
+        .secondary-button {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .danger-button {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .success-button {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        button:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        main {
+            width: min(1200px, 92%);
+            margin: 30px auto;
+        }
+
+        .welcome {
+            margin-bottom: 25px;
+        }
+
+        .welcome h2 {
+            font-size: 27px;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .notice {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            color: #9a3412;
+            padding: 14px 16px;
+            border-radius: 10px;
+            margin-bottom: 22px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 22px;
+            border-radius: 13px;
+            box-shadow: 0 3px 12px rgba(15, 23, 42, 0.03);
+        }
+
+        .stat-card p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .stat-card h3 {
+            font-size: 30px;
+        }
+
+        .section {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            padding: 23px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(15, 23, 42, 0.03);
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .section-heading h2 {
+            font-size: 21px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: white;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: 2px solid #c7d2fe;
+            border-color: var(--primary);
+        }
+
+        .filters input {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filters select {
+            width: auto;
+            min-width: 150px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 680px;
+        }
+
+        th, td {
+            padding: 14px 12px;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #475569;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        td {
+            overflow-wrap: anywhere;
+        }
+
+        .status {
+            display: inline-block;
+            border-radius: 20px;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .status-pending, .status-new {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-resolved, .status-acknowledged {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-in-progress {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .concern-message {
+            max-width: 330px;
+            white-space: pre-wrap;
+        }
+
+        .reply-box {
+            min-width: 220px;
+        }
+
+        .reply-box textarea {
+            min-height: 85px;
+            resize: vertical;
+            margin-bottom: 8px;
+        }
+
+        .reply-box button {
+            margin: 3px 3px 3px 0;
+        }
+
+        .alert-details {
+            max-width: 380px;
+            white-space: pre-wrap;
+        }
+
+        .row-actions {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+        }
+
+        .message {
+            padding: 12px 14px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: none;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .message.error {
+            display: block;
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .message.success {
+            display: block;
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .empty {
+            color: var(--muted);
+            text-align: center;
+            padding: 25px;
+        }
+
+        .last-updated {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 12px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        @media (max-width: 700px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 16px;
+            }
+
+            .welcome h2 {
+                font-size: 23px;
+            }
+
+            header {
+                padding: 16px 4%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="brand">
+        <h1>ASVP Admin</h1>
+        <p>Anonymous Student Voice Platform</p>
+    </div>
+
+    <div class="header-actions">
+        <a href="/" class="button-link secondary-button">
+            Student Homepage
+        </a>
+
+        <button class="primary-button" id="refreshButton" type="button">
+            Refresh Data
+        </button>
+
+        <button class="danger-button" id="logoutButton" type="button">
+            Logout
+        </button>
+    </div>
+</header>
+
+<main>
+
+    <div class="welcome">
+        <h2>Admin Dashboard</h2>
+        <p>
+            Review student concerns, send replies, and manage emergency alerts.
+            Handle every submission confidentially.
+        </p>
+    </div>
+
+    <div class="notice">
+        <strong>Confidentiality reminder:</strong>
+        Student concerns and emergency alerts may contain sensitive information.
+        Access them only for legitimate administrative purposes.
+    </div>
+
+    <div id="globalMessage" class="message" role="status" aria-live="polite"></div>
+
+    <section class="stats">
+        <div class="stat-card">
+            <p>Total Concerns Loaded</p>
+            <h3 id="totalConcerns">—</h3>
+        </div>
+
+        <div class="stat-card">
+            <p>Pending Concerns</p>
+            <h3 id="pendingConcerns">—</h3>
+        </div>
+
+        <div class="stat-card">
+            <p>New Emergency Alerts</p>
+            <h3 id="newAlerts">—</h3>
+        </div>
+    </section>
+
+    <!-- STUDENT CONCERNS -->
+
+    <section class="section" id="concernsSection">
+        <div class="section-heading">
+            <div>
+                <h2>📩 Student Concerns</h2>
+                <p>Review submissions and reply using their tracking codes.</p>
+            </div>
+        </div>
+
+        <div id="concernsMessage" class="message" role="status"></div>
+
+        <div class="filters">
+            <input
+                type="search"
+                id="concernSearch"
+                placeholder="Search tracking code, category, or message..."
+                aria-label="Search student concerns"
+            >
+
+            <select id="concernStatusFilter" aria-label="Filter concerns by status">
+                <option value="ALL">All statuses</option>
+                <option value="PENDING">Pending</option>
+                <option value="IN PROGRESS">In Progress</option>
+                <option value="RESOLVED">Resolved</option>
+            </select>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tracking Code</th>
+                        <th>Category</th>
+                        <th>Concern</th>
+                        <th>Status</th>
+                        <th>Submitted</th>
+                        <th>Reply</th>
+                    </tr>
+                </thead>
+
+                <tbody id="concernsTable">
+                    <tr>
+                        <td colspan="6" class="empty">
+                            Loading concerns...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- EMERGENCY ALERTS -->
+
+    <section class="section" id="emergencySection">
+        <div class="section-heading">
+            <div>
+                <h2>🚨 Emergency Alerts</h2>
+                <p>View and manage alerts requiring urgent attention.</p>
+            </div>
+        </div>
+
+        <div id="emergencyMessage" class="message" role="status"></div>
+
+        <div class="filters">
+            <select id="emergencyStatusFilter" aria-label="Filter emergency alerts">
+                <option value="ALL">All alerts</option>
+                <option value="NEW">New</option>
+                <option value="ACKNOWLEDGED">Acknowledged</option>
+                <option value="RESOLVED">Resolved</option>
+            </select>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Alert Type</th>
+                        <th>Details</th>
+                        <th>Status</th>
+                        <th>Submitted</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="emergencyTable">
+                    <tr>
+                        <td colspan="6" class="empty">
+                            Loading emergency alerts...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="last-updated" id="lastUpdated">
+            Data has not been refreshed yet.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    ASVP — Anonymous Student Voice Platform
+</footer>
+
+<script>
+    /*
+     * API EXPECTATIONS
+     *
+     * GET  /api/concerns/admin
+     *      Admin-only: returns all concerns, including messages and replies.
+     *
+     * PUT  /api/concerns/{trackingCode}/reply
+     *      Admin-only JSON body:
+     *      {"reply":"Your response","status":"In Progress"}
+     *
+     * GET  /api/emergency
+     *      Admin-only: returns emergency alerts.
+     *
+     * PUT  /api/emergency/{id}/status
+     *      Admin-only JSON body:
+     *      {"status":"ACKNOWLEDGED"} or {"status":"RESOLVED"}
+     *
+     * GET  /api/csrf
+     *      Returns a Spring Security CSRF token.
+     *
+     * These concern administration endpoints do not exist in the
+     * controller code shared so far. They must be implemented on
+     * the backend before the concern management features can work.
+     */
+
+    let concerns = [];
+    let emergencies = [];
+    let csrfHeaderName = "X-CSRF-TOKEN";
+    let csrfToken = "";
+
+    const globalMessage = document.getElementById("globalMessage");
+
+    function showMessage(elementId, text, type = "error") {
+        const element = document.getElementById(elementId);
+
+        element.textContent = text;
+        element.className = "message " + type;
+    }
+
+    function clearMessage(elementId) {
+        const element = document.getElementById(elementId);
+        element.textContent = "";
+        element.className = "message";
+    }
+
+    function setGlobalMessage(text, type = "error") {
+        showMessage("globalMessage", text, type);
+    }
+
+    function clearGlobalMessage() {
+        clearMessage("globalMessage");
+    }
+
+    function safeText(value) {
+        return value == null ? "" : String(value);
+    }
+
+    function normalizeStatus(value) {
+        return safeText(value).trim().toUpperCase();
+    }
+
+    function statusClass(status) {
+        const normalized = normalizeStatus(status)
+            .toLowerCase()
+            .replace(/\s+/g, "-");
+
+        return "status status-" + normalized;
+    }
+
+    function formatDate(value) {
+        if (!value) {
+            return "—";
+        }
+
+        const date = new Date(value);
+
+        if (Number.isNaN(date.getTime())) {
+            return safeText(value);
+        }
+
+        return date.toLocaleString();
+    }
+
+    async function apiRequest(url, options = {}) {
+        const method = (options.method || "GET").toUpperCase();
+
+        const headers = new Headers(options.headers || {});
+        headers.set("Accept", "application/json");
+
+        if (options.body && !headers.has("Content-Type")) {
+            headers.set("Content-Type", "application/json");
+        }
+
+        if (!["GET", "HEAD", "OPTIONS"].includes(method)) {
+            if (!csrfToken) {
+                throw new Error("Security token missing. Refresh the page and try again.");
+            }
+
+            headers.set(csrfHeaderName, csrfToken);
+        }
+
+        const response = await fetch(url, {
+            ...options,
+            method,
+            headers,
+            credentials: "same-origin"
+        });
+
+        if (response.status === 401 || response.status === 403) {
+            throw new Error(
+                "Access denied or your admin session has expired. Please log in again."
+            );
+        }
+
+        if (response.redirected && response.url.includes("/login")) {
+            window.location.href = "/admin.html";
+            throw new Error("Please log in as an administrator.");
+        }
+
+        const contentType = response.headers.get("content-type") || "";
+
+        let data = null;
+
+        if (contentType.includes("application/json")) {
+            data = await response.json();
+        } else {
+            const text = await response.text();
+
+            if (text) {
+                data = { message: text };
+            }
+        }
+
+        if (!response.ok) {
+            throw new Error(
+                data && data.message
+                    ? data.message
+                    : "The request failed. Please try again."
+            );
+        }
+
+        return data;
+    }
+
+    async function loadCsrfToken() {
+        const response = await fetch("/api/csrf", {
+            method: "GET",
+            credentials: "same-origin",
+            headers: {
+                "Accept": "application/json"
+            }
+        });
+
+        if (response.status === 401 || response.status === 403) {
+            throw new Error("Please log in as an administrator.");
+        }
+
+        if (!response.ok) {
+            throw new Error("Could not initialize security. Check the backend configuration.");
+        }
+
+        const data = await response.json();
+
+        csrfToken = data.token;
+        csrfHeaderName = data.headerName || "X-CSRF-TOKEN";
+
+        if (!csrfToken) {
+            throw new Error("The server did not provide a security token.");
+        }
+    }
+
+    function makeCell(text, className = "") {
+        const td = document.createElement("td");
+        td.textContent = safeText(text);
+
+        if (className) {
+            td.className = className;
+        }
+
+        return td;
+    }
+
+    function makeStatusCell(status) {
+        const td = document.createElement("td");
+        const span = document.createElement("span");
+
+        span.className = statusClass(status);
+        span.textContent = safeText(status) || "Unknown";
+
+        td.appendChild(span);
+        return td;
+    }
+
+    function renderConcerns() {
+        const tbody = document.getElementById("concernsTable");
+        tbody.replaceChildren();
+
+        const search = document
+            .getElementById("concernSearch")
+            .value
+            .trim()
+            .toLowerCase();
+
+        const statusFilter = document
+            .getElementById("concernStatusFilter")
+            .value;
+
+        const filtered = concerns.filter(concern => {
+            const searchable = [
+                concern.tracking_code,
+                concern.category,
+                concern.message,
+                concern.admin_reply
+            ].map(safeText).join(" ").toLowerCase();
+
+            const matchesSearch = searchable.includes(search);
+
+            const status = normalizeStatus(concern.status);
+            const matchesStatus =
+                statusFilter === "ALL" || status === statusFilter;
+
+            return matchesSearch && matchesStatus;
+        });
+
+        document.getElementById("totalConcerns").textContent = concerns.length;
+
+        document.getElementById("pendingConcerns").textContent =
+            concerns.filter(c => normalizeStatus(c.status) === "PENDING").length;
+
+        if (filtered.length === 0) {
+            const row = document.createElement("tr");
+            const cell = makeCell("No concerns match this filter.");
+            cell.colSpan = 6;
+            cell.className = "empty";
+            row.appendChild(cell);
+            tbody.appendChild(row);
+            return;
+        }
+
+        filtered.forEach(concern => {
+            const row = document.createElement("tr");
+
+            row.appendChild(makeCell(concern.tracking_code));
+            row.appendChild(makeCell(concern.category));
+            row.appendChild(makeCell(concern.message, "concern-message"));
+            row.appendChild(makeStatusCell(concern.status));
+            row.appendChild(makeCell(formatDate(concern.created_at)));
+
+            const replyCell = document.createElement("td");
+            const box = document.createElement("div");
+            box.className = "reply-box";
+
+            const textarea = document.createElement("textarea");
+            textarea.maxLength = 5000;
+            textarea.placeholder = "Write an administrative reply...";
+            textarea.setAttribute(
+                "aria-label",
+                "Reply for " + safeText(concern.tracking_code)
+            );
+            textarea.value = safeText(concern.admin_reply);
+
+            const statusSelect = document.createElement("select");
+            statusSelect.setAttribute(
+                "aria-label",
+                "Concern status for " + safeText(concern.tracking_code)
+            );
+
+            [
+                ["Pending", "Pending"],
+                ["In Progress", "In Progress"],
+                ["Resolved", "Resolved"]
+            ].forEach(([value, label]) => {
+                const option = document.createElement("option");
+                option.value = value;
+                option.textContent = label;
+
+                if (normalizeStatus(concern.status) === normalizeStatus(value)) {
+                    option.selected = true;
+                }
+
+                statusSelect.appendChild(option);
+            });
+
+            const saveButton = document.createElement("button");
+            saveButton.type = "button";
+            saveButton.className = "primary-button";
+            saveButton.textContent = "Save Reply";
+
+            saveButton.addEventListener("click", async () => {
+                const reply = textarea.value.trim();
+
+                if (!reply) {
+                    showMessage(
+                        "concernsMessage",
+                        "Enter a reply before saving.",
+                        "error"
+                    );
+                    return;
+                }
+
+                saveButton.disabled = true;
+
+                try {
+                    await apiRequest(
+                        "/api/concerns/" +
+                            encodeURIComponent(concern.tracking_code) +
+                            "/reply",
+                        {
+                            method: "PUT",
+                            body: JSON.stringify({
+                                reply: reply,
+                                status: statusSelect.value
+                            })
+                        }
+                    );
+
+                    showMessage(
+                        "concernsMessage",
+                        "Reply saved for " + safeText(concern.tracking_code) + ".",
+                        "success"
+                    );
+
+                    await loadConcerns();
+                } catch (error) {
+                    showMessage("concernsMessage", error.message, "error");
+                } finally {
+                    saveButton.disabled = false;
+                }
+            });
+
+            box.appendChild(textarea);
+            box.appendChild(statusSelect);
+            box.appendChild(saveButton);
+            replyCell.appendChild(box);
+            row.appendChild(replyCell);
+
+            tbody.appendChild(row);
+        });
+    }
+
+    function renderEmergencies() {
+        const tbody = document.getElementById("emergencyTable");
+        tbody.replaceChildren();
+
+        const statusFilter = document
+            .getElementById("emergencyStatusFilter")
+            .value;
+
+        const filtered = emergencies.filter(alert => {
+            return statusFilter === "ALL" ||
+                normalizeStatus(alert.status) === statusFilter;
+        });
+
+        document.getElementById("newAlerts").textContent =
+            emergencies.filter(a => normalizeStatus(a.status) === "NEW").length;
+
+        if (filtered.length === 0) {
+            const row = document.createElement("tr");
+            const cell = makeCell("No emergency alerts match this filter.");
+            cell.colSpan = 6;
+            cell.className = "empty";
+            row.appendChild(cell);
+            tbody.appendChild(row);
+            return;
+        }
+
+        filtered.forEach(alert => {
+            const row = document.createElement("tr");
+
+            row.appendChild(makeCell(alert.id));
+            row.appendChild(makeCell(alert.alert_type));
+            row.appendChild(makeCell(alert.details, "alert-details"));
+            row.appendChild(makeStatusCell(alert.status));
+            row.appendChild(makeCell(formatDate(alert.created_at)));
+
+            const actionsCell = document.createElement("td");
+            const actions = document.createElement("div");
+            actions.className = "row-actions";
+
+            if (normalizeStatus(alert.status) === "NEW") {
+                const acknowledgeButton = document.createElement("button");
+                acknowledgeButton.type = "button";
+                acknowledgeButton.className = "secondary-button";
+                acknowledgeButton.textContent = "Acknowledge";
+
+                acknowledgeButton.addEventListener("click", () => {
+                    updateEmergencyStatus(alert.id, "ACKNOWLEDGED");
+                });
+
+                actions.appendChild(acknowledgeButton);
+            }
+
+            if (normalizeStatus(alert.status) !== "RESOLVED") {
+                const resolveButton = document.createElement("button");
+                resolveButton.type = "button";
+                resolveButton.className = "success-button";
+                resolveButton.textContent = "Resolve";
+
+                resolveButton.addEventListener("click", () => {
+                    updateEmergencyStatus(alert.id, "RESOLVED");
+                });
+
+                actions.appendChild(resolveButton);
+            }
+
+            if (actions.childElementCount === 0) {
+                actions.textContent = "No actions available";
+            }
+
+            actionsCell.appendChild(actions);
+            row.appendChild(actionsCell);
+            tbody.appendChild(row);
+        });
+    }
+
+    async function loadConcerns() {
+        const data = await apiRequest("/api/concerns/admin");
+
+        if (!Array.isArray(data)) {
+            throw new Error("Unexpected response from the concerns API.");
+        }
+
+        concerns = data;
+        renderConcerns();
+    }
+
+    async function loadEmergencies() {
+        const data = await apiRequest("/api/emergency");
+
+        if (!Array.isArray(data)) {
+            throw new Error("Unexpected response from the emergency API.");
+        }
+
+        emergencies = data;
+        renderEmergencies();
+    }
+
+    async function updateEmergencyStatus(id, status) {
+        clearMessage("emergencyMessage");
+
+        try {
+            await apiRequest(
+                "/api/emergency/" + encodeURIComponent(id) + "/status",
+                {
+                    method: "PUT",
+                    body: JSON.stringify({ status })
+                }
+            );
+
+            showMessage(
+                "emergencyMessage",
+                "Emergency alert #" + id + " updated to " + status + ".",
+                "success"
+            );
+
+            await loadEmergencies();
+            updateLastUpdated();
+        } catch (error) {
+            showMessage("emergencyMessage", error.message, "error");
+        }
+    }
+
+    function updateLastUpdated() {
+        document.getElementById("lastUpdated").textContent =
+            "Last refreshed: " + new Date().toLocaleString();
+    }
+
+    async function refreshDashboard() {
+        clearGlobalMessage();
+
+        document.getElementById("refreshButton").disabled = true;
+
+        try {
+            await loadCsrfToken();
+
+            const results = await Promise.allSettled([
+                loadConcerns(),
+                loadEmergencies()
+            ]);
+
+            const errors = results
+                .filter(result => result.status === "rejected")
+                .map(result => result.reason.message);
+
+            updateLastUpdated();
+
+            if (errors.length > 0) {
+                setGlobalMessage(errors.join(" "), "error");
+            }
+        } catch (error) {
+            setGlobalMessage(error.message, "error");
+
+            if (
+                error.message.toLowerCase().includes("log in") ||
+                error.message.toLowerCase().includes("session has expired")
+            ) {
+                window.location.href = "/admin.html";
+            }
+        } finally {
+            document.getElementById("refreshButton").disabled = false;
+        }
+    }
+
+    document.getElementById("concernSearch")
+        .addEventListener("input", renderConcerns);
+
+    document.getElementById("concernStatusFilter")
+        .addEventListener("change", renderConcerns);
+
+    document.getElementById("emergencyStatusFilter")
+        .addEventListener("change", renderEmergencies);
+
+    document.getElementById("refreshButton")
+        .addEventListener("click", refreshDashboard);
+
+    document.getElementById("logoutButton")
+        .addEventListener("click", async () => {
+            if (!confirm("Are you sure you want to log out?")) {
+                return;
+            }
+
+            try {
+                await loadCsrfToken();
+
+                const form = document.createElement("form");
+                form.method = "POST";
+                form.action = "/logout";
+
+                const csrfInput = document.createElement("input");
+                csrfInput.type = "hidden";
+                csrfInput.name = "_csrf";
+                csrfInput.value = csrfToken;
+
+                form.appendChild(csrfInput);
+                document.body.appendChild(form);
+                form.submit();
+            } catch (error) {
+                setGlobalMessage(
+                    "Unable to log out securely. Please try again.",
+                    "error"
+                );
+            }
+        });
+
+    refreshDashboard();
+
+    // Refresh the dashboard every 15 seconds while this page is open.
+    setInterval(refreshDashboard, 15000);
+</script>
+
+</body>
+</html>

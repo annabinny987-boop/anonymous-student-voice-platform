@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Voice | Anonymous Student Voice Platform</title>
+
+    <style>
+        :root {
+            --primary: #2455c3;
+            --primary-dark: #173b91;
+            --background: #f3f6fb;
+            --card: #ffffff;
+            --text: #202938;
+            --muted: #64748b;
+            --border: #dce3ed;
+            --success: #147d49;
+            --success-bg: #e7f8ee;
+            --danger: #c62828;
+            --danger-bg: #fff0f0;
+            --warning-bg: #fff8e6;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text);
+            background: var(--background);
+            line-height: 1.6;
+        }
+
+        header {
+            background: #172b4d;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .nav-container {
+            max-width: 1150px;
+            margin: auto;
+            padding: 15px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .brand p {
+            margin: 2px 0 0;
+            font-size: 13px;
+            color: #d7e2f4;
+        }
+
+        nav {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 1150px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            scroll-margin-top: 100px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 5px 18px rgba(26, 48, 80, 0.045);
+        }
+
+        .hero {
+            padding: 48px 35px;
+            background: linear-gradient(135deg, #ffffff, #eaf1ff);
+        }
+
+        .eyebrow {
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 26px;
+        }
+
+        .hero h2 {
+            font-size: clamp(30px, 4vw, 44px);
+            margin: 10px 0;
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        .button {
+            display: inline-block;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 18px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .button:hover {
+            background: var(--primary-dark);
+        }
+
+        .button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .button.secondary {
+            color: var(--primary);
+            background: white;
+            border: 1px solid var(--primary);
+        }
+
+        .button.secondary:hover {
+            background: #edf3ff;
+        }
+
+        .button.danger {
+            background: var(--danger);
+        }
+
+        .button.danger:hover {
+            background: #991b1b;
+        }
+
+        .button.small {
+            padding: 8px 12px;
+            font-size: 13px;
+            margin: 4px 5px 4px 0;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .feature {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 22px;
+        }
+
+        .feature h3 {
+            margin-top: 0;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            font: inherit;
+            color: var(--text);
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: white;
+        }
+
+        textarea {
+            min-height: 135px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: 2px solid #9ab7ff;
+            border-color: var(--primary);
+        }
+
+        .help-text {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 6px;
+        }
+
+        .notice {
+            display: none;
+            padding: 13px 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            overflow-wrap: anywhere;
+        }
+
+        .notice.success {
+            display: block;
+            background: var(--success-bg);
+            color: var(--success);
+            border: 1px solid #a8e4bf;
+        }
+
+        .notice.error {
+            display: block;
+            background: var(--danger-bg);
+            color: #a11d1d;
+            border: 1px solid #f3b4b4;
+        }
+
+        .notice.info {
+            display: block;
+            background: #edf4ff;
+            color: #234d94;
+            border: 1px solid #c5d8ff;
+        }
+
+        .warning {
+            background: var(--warning-bg);
+            border: 1px solid #f0d28b;
+            border-left: 5px solid #d69e17;
+            border-radius: 8px;
+            padding: 17px;
+            margin: 18px 0 24px;
+        }
+
+        .warning p:last-child {
+            margin-bottom: 0;
+        }
+
+        .emergency-card {
+            border-top: 5px solid var(--danger);
+        }
+
+        .emergency-warning {
+            background: var(--danger-bg);
+            border-color: #f1b5b5;
+            border-left-color: var(--danger);
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 18px 0;
+        }
+
+        .checkbox-row input {
+            margin-top: 6px;
+            width: 17px;
+            height: 17px;
+            flex-shrink: 0;
+        }
+
+        .checkbox-row label {
+            font-weight: normal;
+        }
+
+        .tracking-code {
+            display: inline-block;
+            background: #e7f0ff;
+            color: #173b91;
+            padding: 5px 9px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 16px;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        .result-details {
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            padding: 16px;
+            margin-top: 12px;
+            background: #fafcff;
+        }
+
+        .admin-card {
+            border-top: 5px solid #d69e17;
+        }
+
+        .admin-test-warning {
+            background: var(--warning-bg);
+            border: 1px solid #f0d28b;
+            border-radius: 8px;
+            padding: 13px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .alert-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        .alert-card.new-alert {
+            border: 2px solid var(--danger);
+            background: #fff3f3;
+        }
+
+        .alert-card h3 {
+            margin-top: 0;
+        }
+
+        .status {
+            display: inline-block;
+            border-radius: 20px;
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            background: #e8edf5;
+        }
+
+        .status-new {
+            color: #a11d1d;
+            background: #ffe0e0;
+        }
+
+        .status-acknowledged {
+            color: #875900;
+            background: #fff0c2;
+        }
+
+        .status-resolved {
+            color: #12683b;
+            background: #d9f7e5;
+        }
+
+        .admin-connection {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .empty-state {
+            color: var(--muted);
+            padding: 18px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 25px 20px;
+            text-align: center;
+            color: #d7e2f4;
+            background: #172b4d;
+        }
+
+        @media (max-width: 760px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                align-items: flex-start;
+            }
+
+            nav {
+                gap: 12px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .hero {
+                padding: 30px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="nav-container">
+        <div class="brand">
+            <h1>Student Voice</h1>
+            <p>Anonymous Student Voice Platform</p>
+        </div>
+
+        <nav aria-label="Main navigation">
+            <a href="#home">Home</a>
+            <a href="#report">Submit a Concern</a>
+            <a href="#track">Track a Concern</a>
+            <a href="#emergency">Emergency Alert</a>
+            <a href="#admin-emergencies">Admin Alerts</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+    <!-- HOME -->
+    <section class="card hero" id="home">
+        <div class="eyebrow">Your voice matters</div>
+
+        <h2>A safer space to speak up.</h2>
+
+        <p>
+            Share concerns, report problems, and help improve your
+            college community. Submit a concern without entering
+            your name.
+        </p>
+
+        <div class="actions">
+            <a class="button" href="#report">Submit a Concern</a>
+            <a class="button secondary" href="#track">Track a Concern</a>
+            <a class="button danger" href="#emergency">Emergency Alert</a>
+        </div>
+
+        <div class="warning">
+            <strong>Emergency assistance</strong>
+            <p>
+                Use emergency alerts only for genuine, urgent safety
+                situations. This website does not automatically contact
+                police, ambulance services, or other emergency services.
+                If you are in immediate danger, contact local emergency
+                services or a trusted person who can help.
+            </p>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features" aria-label="Platform features">
+        <article class="feature">
+            <h3>🔒 Anonymous reporting</h3>
+            <p>
+                Submit a concern without entering your name or student ID.
+                Avoid including identifying details in your message.
+            </p>
+        </article>
+
+        <article class="feature">
+            <h3>📋 Track your concern</h3>
+            <p>
+                Keep your tracking code and use it to check the status
+                and any available administrator response.
+            </p>
+        </article>
+
+        <article class="feature">
+            <h3>🚨 Urgent safety alerts</h3>
+            <p>
+                Submit a genuine urgent safety alert for administrators
+                to review through the connected dashboard.
+            </p>
+        </article>
+    </section>
+
+    <!-- SUBMIT A CONCERN -->
+    <section class="card" id="report">
+        <h2>Submit an Anonymous Concern</h2>
+
+        <p class="muted">
+            Please describe the issue clearly. Do not include your name
+            or other identifying details if you want to remain anonymous.
+        </p>
+
+        <form id="reportForm">
+            <div class="field">
+                <label for="category">Concern category</label>
+
+                <select id="category" required>
+                    <option value="">Select a category</option>
+                    <option value="Academic">Academic</option>
+                    <option value="Infrastructure">Infrastructure</option>
+                    <option value="Harassment or bullying">
+                        Harassment or bullying
+                    </option>
+                    <option value="Safety">Safety</option>
+                    <option value="Hostel">Hostel</option>
+                    <option value="Facilities">Facilities</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="message">Describe your concern</label>
+
+                <textarea
+                    id="message"
+                    maxlength="5000"
+                    placeholder="Explain what happened and where, without including your identity..."
+                    required
+                ></textarea>
+
+                <p class="help-text">
+                    Maximum 5000 characters.
+                </p>
+            </div>
+
+            <p class="help-text">
+                Do not use this form for an immediate life-threatening
+                emergency. Contact local emergency services or a trusted
+                person who can help.
+            </p>
+
+            <button class="button" id="submitButton" type="submit">
+                Submit Concern
+            </button>
+
+            <div
+                id="reportResult"
+                class="notice"
+                role="status"
+                aria-live="polite"
+            ></div>
+        </form>
+    </section>
+
+    <!-- TRACK A CONCERN -->
+    <section class="card" id="track">
+        <h2>Track a Concern</h2>
+
+        <p class="muted">
+            Enter the tracking code you received after submitting
+            a concern.
+        </p>
+
+        <form id="trackForm">
+            <div class="field">
+                <label for="trackingCode">Tracking code</label>
+
+                <input
+                    type="text"
+                    id="trackingCode"
+                    maxlength="40"
+                    placeholder="Example: ASVP-ABC123"
+                    required
+                >
+            </div>
+
+            <button class="button" id="trackButton" type="submit">
+                Check Status
+            </button>
+
+            <div
+                id="trackResult"
+                class="notice"
+                role="status"
+                aria-live="polite"
+            ></div>
+        </form>
+    </section>
+
+    <!-- EMERGENCY ALERT -->
+    <section class="card emergency-card" id="emergency">
+        <h2>🚨 Emergency Safety Alert</h2>
+
+        <div class="warning emergency-warning">
+            <strong>Read before sending</strong>
+
+            <p>
+                Only send this alert for a genuine, urgent safety threat.
+                False or prank alerts can distract administrators and
+                delay help for someone who needs it.
+            </p>
+
+            <p>
+                This website does not automatically contact emergency
+                services. Do not wait for a website response if you are
+                in immediate danger. Contact local emergency services
+                or a trusted person who can help.
+            </p>
+        </div>
+
+        <form id="emergencyForm">
+            <div class="field">
+                <label for="emergencyType">
+                    Type of urgent situation
+                </label>
+
+                <select id="emergencyType" required>
+                    <option value="">Select a situation</option>
+                    <option value="Immediate physical danger">
+                        Immediate physical danger
+                    </option>
+                    <option value="Medical emergency">
+                        Medical emergency
+                    </option>
+                    <option value="Threat or violence">
+                        Threat or violence
+                    </option>
+                    <option value="Fire or other hazard">
+                        Fire or other hazard
+                    </option>
+                    <option value="Other urgent safety threat">
+                        Other urgent safety threat
+                    </option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="emergencyDetails">
+                    Brief details and location, if safe to share
+                </label>
+
+                <textarea
+                    id="emergencyDetails"
+                    maxlength="2000"
+                    placeholder="Describe the urgent situation and location..."
+                    required
+                ></textarea>
+
+                <p class="help-text">
+                    Maximum 2000 characters. Share only information
+                    necessary to help address the situation.
+                </p>
+            </div>
+
+            <div class="checkbox-row">
+                <input
+                    type="checkbox"
+                    id="emergencyConfirm"
+                    required
+                >
+
+                <label for="emergencyConfirm">
+                    I confirm this is a genuine, urgent safety concern
+                    and understand that this website does not
+                    automatically contact emergency services.
+                </label>
+            </div>
+
+            <button class="button danger" id="emergencyButton" type="submit">
+                Send Emergency Alert
+            </button>
+
+            <div
+                id="emergencyResult"
+                class="notice"
+                role="status"
+                aria-live="polite"
+            ></div>
+        </form>
+    </section>
+
+    <!-- ADMIN EMERGENCY DASHBOARD -->
+    <section class="card admin-card" id="admin-emergencies">
+        <h2>🚨 Emergency Alert Dashboard</h2>
+
+        <div class="admin-test-warning">
+            <strong>Development mode only:</strong>
+            This dashboard is not protected by administrator login.
+            Do not deploy it publicly or use it for real student safety
+            reports until server-side authentication and authorization
+            have been implemented.
+        </div>
+
+        <p class="admin-connection" id="emergencyConnectionStatus">
+            Connecting to the server...
+        </p>
+
+        <div id="adminEmergencyAlerts" aria-live="polite">
+            <p class="empty-state">Loading emergency alerts...</p>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    Student Voice · Speak up safely
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const reportForm = document.getElementById("reportForm");
+        const trackForm = document.getElementById("trackForm");
+        const emergencyForm = document.getElementById("emergencyForm");
+
+        const submitButton = document.getElementById("submitButton");
+        const trackButton = document.getElementById("trackButton");
+        const emergencyButton = document.getElementById("emergencyButton");
+
+        const reportResult = document.getElementById("reportResult");
+        const trackResult = document.getElementById("trackResult");
+        const emergencyResult = document.getElementById("emergencyResult");
+
+        const adminEmergencyAlerts =
+            document.getElementById("adminEmergencyAlerts");
+
+        const emergencyConnectionStatus =
+            document.getElementById("emergencyConnectionStatus");
+
+        let previousNewAlertIds = new Set();
+
+        /*
+         * Display messages safely using textContent.
+         */
+        function showResult(element, message, type) {
+            element.textContent = message;
+            element.className = "notice " + type;
+        }
+
+        /*
+         * Parse JSON responses safely.
+         */
+        async function readResponse(response) {
+            const text = await response.text();
+
+            if (!text) {
+                return {};
+            }
+
+            try {
+                return JSON.parse(text);
+            } catch {
+                return { message: text };
+            }
+        }
+
+        /*
+         * Extract a useful error message from an API response.
+         */
+        function getErrorMessage(data, fallback) {
+            if (data && typeof data.message === "string") {
+                return data.message;
+            }
+
+            if (data && typeof data.error === "string") {
+                return data.error;
+            }
+
+            return fallback;
+        }
+
+        /*
+         * Submit a concern.
+         * Backend: POST /api/concerns
+         */
+        reportForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const category =
+                document.getElementById("category").value.trim();
+
+            const message =
+                document.getElementById("message").value.trim();
+
+            if (!category || !message) {
+                showResult(
+                    reportResult,
+                    "Please select a category and describe your concern.",
+                    "error"
+                );
+                return;
+            }
+
+            submitButton.disabled = true;
+            submitButton.textContent = "Submitting...";
+
+            showResult(
+                reportResult,
+                "Submitting your concern...",
+                "info"
+            );
+
+            try {
+                const response = await fetch("/api/concerns", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        category: category,
+                        message: message
+                    })
+                });
+
+                const data = await readResponse(response);
+
+                if (!response.ok) {
+                    throw new Error(
+                        getErrorMessage(
+                            data,
+                            "Could not submit the concern."
+                        )
+                    );
+                }
+
+                reportResult.replaceChildren();
+
+                const messageElement = document.createElement("p");
+                messageElement.textContent =
+                    data.message || "Concern submitted successfully.";
+
+                const codeLabel = document.createElement("p");
+                codeLabel.textContent =
+                    "Save your tracking code somewhere safe:";
+
+                const codeElement = document.createElement("span");
+                codeElement.className = "tracking-code";
+                codeElement.textContent =
+                    data.trackingCode || "Tracking code unavailable";
+
+                reportResult.className = "notice success";
+                reportResult.append(
+                    messageElement,
+                    codeLabel,
+                    codeElement
+                );
+
+                reportForm.reset();
+
+                // Refresh the dashboard in case an alert was also submitted.
+                loadAdminEmergencyAlerts();
+
+            } catch (error) {
+                showResult(
+                    reportResult,
+                    error.message || "A network error occurred.",
+                    "error"
+                );
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = "Submit Concern";
+            }
+        });
+
+        /*
+         * Track a concern.
+         * Backend: GET /api/concerns/{trackingCode}
+         */
+        trackForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const code = document.getElementById("trackingCode")
+                .value.trim().toUpperCase();
+
+            if (!code) {
+                showResult(
+                    trackResult,
+                    "Please enter your tracking code.",
+                    "error"
+                );
+                return;
+            }
+
+            trackButton.disabled = true;
+            trackButton.textContent = "Checking...";
+
+            showResult(trackResult, "Checking concern status...", "info");
+
+            try {
+                const response = await fetch(
+                    "/api/concerns/" + encodeURIComponent(code)
+                );
+
+                const data = await readResponse(response);
+
+                if (!response.ok) {
+                    throw new Error(
+                        getErrorMessage(
+                            data,
+                            "No matching concern was found."
+                        )
+                    );
+                }
+
+                const resultBox = document.createElement("div");
+                resultBox.className = "result-details";
+
+                const codeHeading = document.createElement("p");
+                codeHeading.textContent =
+                    "Tracking code: " + (data.tracking_code || code);
+
+                const category = document.createElement("p");
+                category.textContent =
+                    "Category: " + (data.category || "Not provided");
+
+                const status = document.createElement("p");
+                status.textContent =
+                    "Status: " + (data.status || "Pending");
+
+                const reply = document.createElement("p");
+                reply.textContent =
+                    "Administrator response: " +
+                    (data.admin_reply || "No response has been added yet.");
+
+                resultBox.append(
+                    codeHeading,
+                    category,
+                    status,
+                    reply
+                );
+
+                trackResult.replaceChildren(resultBox);
+                trackResult.className = "notice success";
+
+            } catch (error) {
+                showResult(
+                    trackResult,
+                    error.message || "A network error occurred.",
+                    "error"
+                );
+            } finally {
+                trackButton.disabled = false;
+                trackButton.textContent = "Check Status";
+            }
+        });
+
+        /*
+         * Submit an emergency alert.
+         * Backend: POST /api/emergency
+         */
+        emergencyForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const alertType =
+                document.getElementById("emergencyType").value.trim();
+
+            const details =
+                document.getElementById("emergencyDetails").value.trim();
+
+            const confirmed =
+                document.getElementById("emergencyConfirm").checked;
+
+            if (!alertType || !details) {
+                showResult(
+                    emergencyResult,
+                    "Select a situation and enter the details.",
+                    "error"
+                );
+                return;
+            }
+
+            if (!confirmed) {
+                showResult(
+                    emergencyResult,
+                    "Please confirm that this is a genuine, urgent safety concern.",
+                    "error"
+                );
+                return;
+            }
+
+            emergencyButton.disabled = true;
+            emergencyButton.textContent = "Sending Alert...";
+
+            showResult(
+                emergencyResult,
+                "Submitting emergency alert...",
+                "info"
+            );
+
+            try {
+                const response = await fetch("/api/emergency", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        alertType: alertType,
+                        details: details
+                    })
+                });
+
+                const data = await readResponse(response);
+
+                if (!response.ok) {
+                    throw new Error(
+                        getErrorMessage(
+                            data,
+                            "The emergency alert could not be submitted."
+                        )
+                    );
+                }
+
+                showResult(
+                    emergencyResult,
+                    (data.message || "Emergency alert submitted.") +
+                    " Status: " + (data.status || "NEW") +
+                    ". This website does not automatically contact emergency services.",
+                    "success"
+                );
+
+                emergencyForm.reset();
+
+                // Refresh the dashboard immediately after submission.
+                await loadAdminEmergencyAlerts();
+
+            } catch (error) {
+                showResult(
+                    emergencyResult,
+                    error.message ||
+                        "A network error occurred while sending the alert.",
+                    "error"
+                );
+            } finally {
+                emergencyButton.disabled = false;
+                emergencyButton.textContent = "Send Emergency Alert";
+            }
+        });
+
+        /*
+         * Create dashboard elements without inserting server text as HTML.
+         */
+        function createTextElement(tag, text, className) {
+            const element = document.createElement(tag);
+            element.textContent = text;
+
+            if (className) {
+                element.className = className;
+            }
+
+            return element;
+        }
+
+        /*
+         * Retrieve emergency alerts.
+         * Backend: GET /api/emergency
+         */
+        async function loadAdminEmergencyAlerts() {
+            try {
+                const response = await fetch("/api/emergency", {
+                    cache: "no-store"
+                });
+
+                const data = await readResponse(response);
+
+                if (!response.ok) {
+                    throw new Error(
+                        getErrorMessage(
+                            data,
+                            "Unable to retrieve emergency alerts."
+                        )
+                    );
+                }
+
+                if (!Array.isArray(data)) {
+                    throw new Error(
+                        "The server returned an unexpected alert response."
+                    );
+                }
+
+                emergencyConnectionStatus.textContent =
+                    "Connected · Last checked: " +
+                    new Date().toLocaleTimeString();
+
+                const currentNewAlertIds = new Set();
+                adminEmergencyAlerts.replaceChildren();
+
+                if (data.length === 0) {
+                    adminEmergencyAlerts.appendChild(
+                        createTextElement(
+                            "p",
+                            "No emergency alerts have been submitted.",
+                            "empty-state"
+                        )
+                    );
+
+                    previousNewAlertIds.clear();
+                    return;
+                }
+
+                data.forEach(function (alert) {
+                    const card = document.createElement("article");
+
+                    card.className = "alert-card";
+
+                    if (alert.status === "NEW") {
+                        card.classList.add("new-alert");
+                        currentNewAlertIds.add(alert.id);
+
+                        if (!previousNewAlertIds.has(alert.id)) {
+                            console.warn(
+                                "New emergency alert received:",
+                                alert.id,
+                                alert.alert_type
+                            );
+                        }
+                    }
+
+                    const title = createTextElement(
+                        "h3",
+                        (alert.status === "NEW" ? "🚨 NEW ALERT: " : "Alert: ") +
+                        (alert.alert_type || "Unspecified emergency")
+                    );
+
+                    const statusClass =
+                        alert.status === "NEW"
+                            ? "status status-new"
+                            : alert.status === "ACKNOWLEDGED"
+                                ? "status status-acknowledged"
+                                : "status status-resolved";
+
+                    const status = createTextElement(
+                        "span",
+                        "Status: " + (alert.status || "Unknown"),
+                        statusClass
+                    );
+
+                    const details = createTextElement(
+                        "p",
+                        "Details and location: " +
+                        (alert.details || "No details provided.")
+                    );
+
+                    const createdAt = createTextElement(
+                        "p",
+                        "Submitted: " +
+                        (alert.created_at || "Time unavailable"),
+                        "muted"
+                    );
+
+                    card.append(title, status, details, createdAt);
+
+                    if (alert.status === "NEW") {
+                        const acknowledgeButton =
+                            document.createElement("button");
+
+                        acknowledgeButton.type = "button";
+                        acknowledgeButton.className = "button small";
+                        acknowledgeButton.textContent = "Acknowledge Alert";
+
+                        acknowledgeButton.addEventListener("click", function () {
+                            updateEmergencyAlertStatus(
+                                alert.id,
+                                "ACKNOWLEDGED",
+                                acknowledgeButton
+                            );
+                        });
+
+                        card.appendChild(acknowledgeButton);
+                    }
+
+                    if (alert.status === "ACKNOWLEDGED") {
+                        const resolveButton =
+                            document.createElement("button");
+
+                        resolveButton.type = "button";
+                        resolveButton.className = "button small";
+                        resolveButton.textContent = "Mark as Resolved";
+
+                        resolveButton.addEventListener("click", function () {
+                            updateEmergencyAlertStatus(
+                                alert.id,
+                                "RESOLVED",
+                                resolveButton
+                            );
+                        });
+
+                        card.appendChild(resolveButton);
+                    }
+
+                    adminEmergencyAlerts.appendChild(card);
+                });
+
+                previousNewAlertIds = currentNewAlertIds;
+
+            } catch (error) {
+                emergencyConnectionStatus.textContent =
+                    "Could not load alerts. Check that the Spring Boot server is running.";
+
+                console.error("Emergency dashboard error:", error);
+            }
+        }
+
+        /*
+         * Update an emergency alert's status.
+         * Backend: PUT /api/emergency/{id}/status
+         */
+        async function updateEmergencyAlertStatus(id, status, button) {
+            button.disabled = true;
+
+            try {
+                const response = await fetch(
+                    "/api/emergency/" + encodeURIComponent(id) + "/status",
+                    {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            status: status
+                        })
+                    }
+                );
+
+                const data = await readResponse(response);
+
+                if (!response.ok) {
+                    throw new Error(
+                        getErrorMessage(
+                            data,
+                            "Could not update the emergency alert."
+                        )
+                    );
+                }
+
+                await loadAdminEmergencyAlerts();
+
+            } catch (error) {
+                alert(
+                    error.message ||
+                    "Could not update the alert. Please try again."
+                );
+
+                button.disabled = false;
+                console.error("Alert status update error:", error);
+            }
+        }
+
+        /*
+         * Initial dashboard load and five-second refresh.
+         */
+        loadAdminEmergencyAlerts();
+
+        window.setInterval(function () {
+            loadAdminEmergencyAlerts();
+        }, 5000);
+
+    });
+</script>
+
+</body>
+</html>
