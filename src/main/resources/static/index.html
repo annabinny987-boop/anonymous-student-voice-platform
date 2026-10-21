@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#172b4d">
 
     <title>Student Voice | Anonymous Student Voice Platform</title>
 
@@ -333,6 +333,10 @@
             margin-top: 12px;
         }
 
+        .tracking-result p {
+            margin: 8px 0;
+        }
+
         footer {
             margin-top: 40px;
             padding: 25px 20px;
@@ -369,7 +373,6 @@
 
 <header>
     <div class="nav-container">
-
         <div class="brand">
             <h1>Student Voice</h1>
             <p>Anonymous Student Voice Platform</p>
@@ -381,7 +384,6 @@
             <a href="#track">Track a Concern</a>
             <a href="#emergency">Emergency Alert</a>
         </nav>
-
     </div>
 </header>
 
@@ -389,7 +391,6 @@
 
     <!-- HOME -->
     <section class="card hero" id="home">
-
         <div class="eyebrow">Your voice matters</div>
 
         <h2>A safer space to speak up.</h2>
@@ -402,19 +403,12 @@
 
         <div class="actions">
             <a class="button" href="#report">Submit a Concern</a>
-
-            <a class="button secondary" href="#track">
-                Track a Concern
-            </a>
-
-            <a class="button danger" href="#emergency">
-                Emergency Alert
-            </a>
+            <a class="button secondary" href="#track">Track a Concern</a>
+            <a class="button danger" href="#emergency">Emergency Alert</a>
         </div>
 
         <div class="warning">
             <strong>Emergency assistance</strong>
-
             <p>
                 Use emergency alerts only for genuine, urgent safety
                 situations. This website does not automatically contact
@@ -423,15 +417,12 @@
                 services or a trusted person who can help.
             </p>
         </div>
-
     </section>
 
-    <!-- PLATFORM FEATURES -->
+    <!-- FEATURES -->
     <section class="features" aria-label="Platform features">
-
         <article class="feature">
             <h3>🔒 Anonymous reporting</h3>
-
             <p>
                 Submit a concern without entering your name or student ID.
                 Avoid including identifying details in your message.
@@ -440,7 +431,6 @@
 
         <article class="feature">
             <h3>📋 Track your concern</h3>
-
             <p>
                 Keep your tracking code and use it to check the status
                 and any available administrator response.
@@ -449,18 +439,15 @@
 
         <article class="feature">
             <h3>🚨 Urgent safety alerts</h3>
-
             <p>
                 Submit a genuine urgent safety alert for administrators
                 to review through the secured administrative dashboard.
             </p>
         </article>
-
     </section>
 
     <!-- SUBMIT A CONCERN -->
     <section class="card" id="report">
-
         <h2>Submit an Anonymous Concern</h2>
 
         <p class="muted">
@@ -469,7 +456,6 @@
         </p>
 
         <form id="reportForm">
-
             <div class="field">
                 <label for="category">Concern category</label>
 
@@ -477,9 +463,7 @@
                     <option value="">Select a category</option>
                     <option value="Academic">Academic</option>
                     <option value="Infrastructure">Infrastructure</option>
-                    <option value="Harassment or bullying">
-                        Harassment or bullying
-                    </option>
+                    <option value="Harassment or bullying">Harassment or bullying</option>
                     <option value="Safety">Safety</option>
                     <option value="Hostel">Hostel</option>
                     <option value="Facilities">Facilities</option>
@@ -497,9 +481,7 @@
                     required
                 ></textarea>
 
-                <p class="help-text">
-                    Maximum 5000 characters.
-                </p>
+                <p class="help-text">Maximum 5000 characters.</p>
             </div>
 
             <p class="help-text">
@@ -508,11 +490,7 @@
                 person who can help.
             </p>
 
-            <button
-                class="button"
-                id="submitButton"
-                type="submit"
-            >
+            <button class="button" id="submitButton" type="submit">
                 Submit Concern
             </button>
 
@@ -522,14 +500,11 @@
                 role="status"
                 aria-live="polite"
             ></div>
-
         </form>
-
     </section>
 
     <!-- TRACK A CONCERN -->
     <section class="card" id="track">
-
         <h2>Track a Concern</h2>
 
         <p class="muted">
@@ -538,7 +513,6 @@
         </p>
 
         <form id="trackForm">
-
             <div class="field">
                 <label for="trackingCode">Tracking code</label>
 
@@ -551,11 +525,7 @@
                 >
             </div>
 
-            <button
-                class="button"
-                id="trackButton"
-                type="submit"
-            >
+            <button class="button" id="trackButton" type="submit">
                 Check Status
             </button>
 
@@ -565,18 +535,14 @@
                 role="status"
                 aria-live="polite"
             ></div>
-
         </form>
-
     </section>
 
-    <!-- EMERGENCY ALERT SUBMISSION -->
+    <!-- EMERGENCY ALERT -->
     <section class="card emergency-card" id="emergency">
-
         <h2>🚨 Emergency Safety Alert</h2>
 
         <div class="warning emergency-warning">
-
             <strong>Read before sending</strong>
 
             <p>
@@ -591,38 +557,19 @@
                 in immediate danger. Contact local emergency services
                 or a trusted person who can help.
             </p>
-
         </div>
 
         <form id="emergencyForm">
-
             <div class="field">
-                <label for="emergencyType">
-                    Type of urgent situation
-                </label>
+                <label for="emergencyType">Type of urgent situation</label>
 
                 <select id="emergencyType" required>
                     <option value="">Select a situation</option>
-
-                    <option value="Immediate physical danger">
-                        Immediate physical danger
-                    </option>
-
-                    <option value="Medical emergency">
-                        Medical emergency
-                    </option>
-
-                    <option value="Threat or violence">
-                        Threat or violence
-                    </option>
-
-                    <option value="Fire or other hazard">
-                        Fire or other hazard
-                    </option>
-
-                    <option value="Other urgent safety threat">
-                        Other urgent safety threat
-                    </option>
+                    <option value="Immediate physical danger">Immediate physical danger</option>
+                    <option value="Medical emergency">Medical emergency</option>
+                    <option value="Threat or violence">Threat or violence</option>
+                    <option value="Fire or other hazard">Fire or other hazard</option>
+                    <option value="Other urgent safety threat">Other urgent safety threat</option>
                 </select>
             </div>
 
@@ -645,26 +592,16 @@
             </div>
 
             <div class="checkbox-row">
-
-                <input
-                    type="checkbox"
-                    id="emergencyConfirm"
-                    required
-                >
+                <input type="checkbox" id="emergencyConfirm" required>
 
                 <label for="emergencyConfirm">
                     I confirm this is a genuine, urgent safety concern
                     and understand that this website does not
                     automatically contact emergency services.
                 </label>
-
             </div>
 
-            <button
-                class="button danger"
-                id="emergencyButton"
-                type="submit"
-            >
+            <button class="button danger" id="emergencyButton" type="submit">
                 Send Emergency Alert
             </button>
 
@@ -674,9 +611,7 @@
                 role="status"
                 aria-live="polite"
             ></div>
-
         </form>
-
     </section>
 
 </main>
@@ -686,442 +621,378 @@
 </footer>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+"use strict";
 
-        const reportForm = document.getElementById("reportForm");
-        const trackForm = document.getElementById("trackForm");
-        const emergencyForm = document.getElementById("emergencyForm");
+document.addEventListener("DOMContentLoaded", function () {
 
-        const submitButton = document.getElementById("submitButton");
-        const trackButton = document.getElementById("trackButton");
-        const emergencyButton = document.getElementById("emergencyButton");
+    const reportForm = document.getElementById("reportForm");
+    const trackForm = document.getElementById("trackForm");
+    const emergencyForm = document.getElementById("emergencyForm");
 
-        const reportResult = document.getElementById("reportResult");
-        const trackResult = document.getElementById("trackResult");
-        const emergencyResult = document.getElementById("emergencyResult");
+    const submitButton = document.getElementById("submitButton");
+    const trackButton = document.getElementById("trackButton");
+    const emergencyButton = document.getElementById("emergencyButton");
 
-        /*
-         * Display a message safely.
-         */
-        function showResult(element, message, type) {
-            element.textContent = message;
-            element.className = "notice " + type;
+    const reportResult = document.getElementById("reportResult");
+    const trackResult = document.getElementById("trackResult");
+    const emergencyResult = document.getElementById("emergencyResult");
+
+    /*
+     * Show messages safely. Never interpret server content as HTML.
+     */
+    function showResult(element, message, type) {
+        element.textContent = message;
+        element.className = "notice " + type;
+    }
+
+    /*
+     * Read API responses and reject HTML pages.
+     */
+    async function readApiResponse(response) {
+        const contentType =
+            response.headers.get("content-type") || "";
+
+        if (response.redirected) {
+            const finalUrl = new URL(response.url);
+
+            if (finalUrl.pathname === "/admin.html") {
+                throw new Error(
+                    "The server redirected this request to the admin login page. " +
+                    "The public API security configuration needs attention."
+                );
+            }
         }
 
-        /*
-         * Read and validate a server response.
-         *
-         * HTML responses are rejected instead of being displayed
-         * as successful API responses.
-         */
-        async function readApiResponse(response) {
-
-            const contentType =
-                response.headers.get("content-type") || "";
-
+        if (!contentType.toLowerCase().includes("application/json")) {
             const responseText = await response.text();
 
-            if (response.redirected) {
-                const finalUrl = new URL(response.url);
+            console.error("Unexpected API response:", {
+                status: response.status,
+                contentType: contentType,
+                response: responseText.substring(0, 300)
+            });
 
-                if (finalUrl.pathname === "/admin.html") {
-                    throw new Error(
-                        "The server redirected the request to the admin " +
-                        "login page. Please check the server security settings."
-                    );
-                }
-            }
-
-            if (!contentType.toLowerCase().includes("application/json")) {
-                console.error(
-                    "Unexpected API response:",
-                    response.status,
-                    contentType,
-                    responseText.substring(0, 300)
-                );
-
-                throw new Error(
-                    "The server returned an unexpected response instead " +
-                    "of JSON. Please check the server configuration."
-                );
-            }
-
-            let data;
-
-            try {
-                data = responseText ? JSON.parse(responseText) : {};
-            } catch {
-                throw new Error(
-                    "The server returned invalid JSON. Please try again."
-                );
-            }
-
-            if (!response.ok) {
-
-                const errorMessage =
-                    data.detail ||
-                    data.message ||
-                    data.error ||
-                    "The request failed. Please try again.";
-
-                throw new Error(errorMessage);
-            }
-
-            return data;
+            throw new Error(
+                "The server returned HTML instead of JSON. " +
+                "Please check the backend endpoint and security settings."
+            );
         }
 
-        /*
-         * SUBMIT A CONCERN
-         *
-         * Backend endpoint:
-         * POST /api/concerns
-         */
-        reportForm.addEventListener("submit", async function (event) {
+        let data;
 
-            event.preventDefault();
+        try {
+            data = await response.json();
+        } catch {
+            throw new Error("The server returned invalid JSON.");
+        }
 
-            const category =
-                document.getElementById("category").value.trim();
+        if (!response.ok) {
+            throw new Error(
+                data.detail ||
+                data.message ||
+                data.error ||
+                "The request failed. Please try again."
+            );
+        }
 
-            const message =
-                document.getElementById("message").value.trim();
+        return data;
+    }
 
-            if (!category || !message) {
-                showResult(
-                    reportResult,
-                    "Please select a category and describe your concern.",
-                    "error"
-                );
-                return;
-            }
+    /*
+     * SUBMIT A CONCERN
+     * POST /api/concerns
+     */
+    reportForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-            if (message.length > 5000) {
-                showResult(
-                    reportResult,
-                    "Your concern cannot exceed 5000 characters.",
-                    "error"
-                );
-                return;
-            }
+        const category =
+            document.getElementById("category").value.trim();
 
-            submitButton.disabled = true;
-            submitButton.textContent = "Submitting...";
+        const message =
+            document.getElementById("message").value.trim();
 
+        if (!category || !message) {
             showResult(
                 reportResult,
-                "Submitting your concern...",
-                "info"
+                "Please select a category and describe your concern.",
+                "error"
+            );
+            return;
+        }
+
+        if (message.length > 5000) {
+            showResult(
+                reportResult,
+                "Your concern cannot exceed 5000 characters.",
+                "error"
+            );
+            return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
+
+        showResult(
+            reportResult,
+            "Submitting your concern...",
+            "info"
+        );
+
+        try {
+            const response = await fetch("/api/concerns", {
+                method: "POST",
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    category: category,
+                    message: message
+                })
+            });
+
+            const data = await readApiResponse(response);
+
+            if (
+                typeof data.trackingCode !== "string" ||
+                !data.trackingCode.trim()
+            ) {
+                throw new Error(
+                    "The server did not return a tracking code. " +
+                    "Please check the backend response."
+                );
+            }
+
+            const trackingCode = data.trackingCode.trim();
+
+            const successMessage = document.createElement("p");
+            successMessage.textContent =
+                data.message || "Concern submitted successfully.";
+
+            const instruction = document.createElement("p");
+            instruction.textContent =
+                "Save this tracking code to check the status of your concern:";
+
+            const codeElement = document.createElement("span");
+            codeElement.className = "tracking-code";
+            codeElement.textContent = trackingCode;
+
+            const codeContainer = document.createElement("div");
+            codeContainer.className = "tracking-result";
+            codeContainer.appendChild(codeElement);
+
+            reportResult.replaceChildren(
+                successMessage,
+                instruction,
+                codeContainer
+            );
+            reportResult.className = "notice success";
+
+            reportForm.reset();
+
+            // Let the student track this concern immediately.
+            document.getElementById("trackingCode").value = trackingCode;
+
+        } catch (error) {
+            showResult(
+                reportResult,
+                error.message ||
+                "A network error occurred while submitting your concern.",
+                "error"
             );
 
-            try {
+            console.error("Concern submission error:", error);
 
-                const response = await fetch("/api/concerns", {
-                    method: "POST",
-                    credentials: "same-origin",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json"
-                    },
-                    body: JSON.stringify({
-                        category: category,
-                        message: message
-                    })
-                });
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = "Submit Concern";
+        }
+    });
 
-                const data = await readApiResponse(response);
+    /*
+     * TRACK A CONCERN
+     * GET /api/concerns/{trackingCode}
+     */
+    trackForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-                /*
-                 * The backend must return the tracking code.
-                 */
-                if (
-                    typeof data.trackingCode !== "string" ||
-                    !data.trackingCode.trim()
-                ) {
-                    throw new Error(
-                        "The server did not return a tracking code. " +
-                        "Please check the backend response."
-                    );
-                }
+        const code = document.getElementById("trackingCode")
+            .value.trim().toUpperCase();
 
-                /*
-                 * Display the success message and tracking code safely.
-                 */
-                reportResult.replaceChildren();
-
-                const successMessage = document.createElement("p");
-
-                successMessage.textContent =
-                    data.message || "Concern submitted successfully.";
-
-                const instruction = document.createElement("p");
-
-                instruction.textContent =
-                    "Save this tracking code. You will need it to check " +
-                    "the status of your concern:";
-
-                const codeElement = document.createElement("span");
-
-                codeElement.className = "tracking-code";
-                codeElement.textContent = data.trackingCode;
-
-                const codeContainer = document.createElement("div");
-
-                codeContainer.className = "tracking-result";
-                codeContainer.appendChild(codeElement);
-
-                reportResult.className = "notice success";
-
-                reportResult.append(
-                    successMessage,
-                    instruction,
-                    codeContainer
-                );
-
-                /*
-                 * Reset the form only after successful submission.
-                 */
-                reportForm.reset();
-
-                /*
-                 * Fill the tracking form with the newly generated code.
-                 */
-                document.getElementById("trackingCode").value =
-                    data.trackingCode;
-
-            } catch (error) {
-
-                showResult(
-                    reportResult,
-                    error.message ||
-                    "A network error occurred while submitting your concern.",
-                    "error"
-                );
-
-                console.error("Concern submission error:", error);
-
-            } finally {
-
-                submitButton.disabled = false;
-                submitButton.textContent = "Submit Concern";
-            }
-        });
-
-        /*
-         * TRACK A CONCERN
-         *
-         * Backend endpoint:
-         * GET /api/concerns/{trackingCode}
-         */
-        trackForm.addEventListener("submit", async function (event) {
-
-            event.preventDefault();
-
-            const code = document.getElementById("trackingCode")
-                .value.trim().toUpperCase();
-
-            if (!code) {
-                showResult(
-                    trackResult,
-                    "Please enter your tracking code.",
-                    "error"
-                );
-                return;
-            }
-
-            trackButton.disabled = true;
-            trackButton.textContent = "Checking...";
-
+        if (!code) {
             showResult(
                 trackResult,
-                "Checking concern status...",
-                "info"
+                "Please enter your tracking code.",
+                "error"
+            );
+            return;
+        }
+
+        trackButton.disabled = true;
+        trackButton.textContent = "Checking...";
+
+        showResult(
+            trackResult,
+            "Checking concern status...",
+            "info"
+        );
+
+        try {
+            const response = await fetch(
+                "/api/concerns/" + encodeURIComponent(code),
+                {
+                    method: "GET",
+                    credentials: "same-origin",
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                }
             );
 
-            try {
+            const data = await readApiResponse(response);
 
-                const response = await fetch(
-                    "/api/concerns/" + encodeURIComponent(code),
-                    {
-                        method: "GET",
-                        credentials: "same-origin",
-                        headers: {
-                            "Accept": "application/json"
-                        }
-                    }
-                );
+            const resultBox = document.createElement("div");
+            resultBox.className = "result-details";
 
-                const data = await readApiResponse(response);
+            const codeElement = document.createElement("p");
+            codeElement.textContent =
+                "Tracking code: " + (data.tracking_code || code);
 
-                const resultBox = document.createElement("div");
+            const categoryElement = document.createElement("p");
+            categoryElement.textContent =
+                "Category: " + (data.category || "Not provided");
 
-                resultBox.className = "result-details";
+            const statusElement = document.createElement("p");
+            statusElement.textContent =
+                "Status: " + (data.status || "Pending");
 
-                const codeElement = document.createElement("p");
+            const replyElement = document.createElement("p");
+            replyElement.textContent =
+                "Administrator response: " +
+                (data.admin_reply || "No response has been added yet.");
 
-                codeElement.textContent =
-                    "Tracking code: " +
-                    (data.tracking_code || code);
+            resultBox.append(
+                codeElement,
+                categoryElement,
+                statusElement,
+                replyElement
+            );
 
-                const categoryElement = document.createElement("p");
+            trackResult.replaceChildren(resultBox);
+            trackResult.className = "notice success";
 
-                categoryElement.textContent =
-                    "Category: " +
-                    (data.category || "Not provided");
+        } catch (error) {
+            showResult(
+                trackResult,
+                error.message ||
+                "A network error occurred while checking the concern.",
+                "error"
+            );
 
-                const statusElement = document.createElement("p");
+            console.error("Concern tracking error:", error);
 
-                statusElement.textContent =
-                    "Status: " +
-                    (data.status || "Pending");
+        } finally {
+            trackButton.disabled = false;
+            trackButton.textContent = "Check Status";
+        }
+    });
 
-                const replyElement = document.createElement("p");
+    /*
+     * SUBMIT AN EMERGENCY ALERT
+     * POST /api/emergency
+     */
+    emergencyForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-                replyElement.textContent =
-                    "Administrator response: " +
-                    (
-                        data.admin_reply ||
-                        "No response has been added yet."
-                    );
+        const alertType =
+            document.getElementById("emergencyType").value.trim();
 
-                resultBox.append(
-                    codeElement,
-                    categoryElement,
-                    statusElement,
-                    replyElement
-                );
+        const details =
+            document.getElementById("emergencyDetails").value.trim();
 
-                trackResult.replaceChildren(resultBox);
-                trackResult.className = "notice success";
+        const confirmed =
+            document.getElementById("emergencyConfirm").checked;
 
-            } catch (error) {
+        if (!alertType || !details) {
+            showResult(
+                emergencyResult,
+                "Select a situation and enter the details.",
+                "error"
+            );
+            return;
+        }
 
-                showResult(
-                    trackResult,
-                    error.message ||
-                    "A network error occurred while checking the concern.",
-                    "error"
-                );
+        if (details.length > 2000) {
+            showResult(
+                emergencyResult,
+                "Emergency details cannot exceed 2000 characters.",
+                "error"
+            );
+            return;
+        }
 
-                console.error("Concern tracking error:", error);
+        if (!confirmed) {
+            showResult(
+                emergencyResult,
+                "Please confirm that this is a genuine, urgent safety concern.",
+                "error"
+            );
+            return;
+        }
 
-            } finally {
+        emergencyButton.disabled = true;
+        emergencyButton.textContent = "Sending Alert...";
 
-                trackButton.disabled = false;
-                trackButton.textContent = "Check Status";
-            }
-        });
+        showResult(
+            emergencyResult,
+            "Submitting emergency alert...",
+            "info"
+        );
 
-        /*
-         * SUBMIT AN EMERGENCY ALERT
-         *
-         * Backend endpoint:
-         * POST /api/emergency
-         */
-        emergencyForm.addEventListener("submit", async function (event) {
+        try {
+            const response = await fetch("/api/emergency", {
+                method: "POST",
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    alertType: alertType,
+                    details: details
+                })
+            });
 
-            event.preventDefault();
-
-            const alertType =
-                document.getElementById("emergencyType").value.trim();
-
-            const details =
-                document.getElementById("emergencyDetails").value.trim();
-
-            const confirmed =
-                document.getElementById("emergencyConfirm").checked;
-
-            if (!alertType || !details) {
-
-                showResult(
-                    emergencyResult,
-                    "Select a situation and enter the details.",
-                    "error"
-                );
-
-                return;
-            }
-
-            if (details.length > 2000) {
-
-                showResult(
-                    emergencyResult,
-                    "Emergency details cannot exceed 2000 characters.",
-                    "error"
-                );
-
-                return;
-            }
-
-            if (!confirmed) {
-
-                showResult(
-                    emergencyResult,
-                    "Please confirm that this is a genuine, urgent safety concern.",
-                    "error"
-                );
-
-                return;
-            }
-
-            emergencyButton.disabled = true;
-            emergencyButton.textContent = "Sending Alert...";
+            const data = await readApiResponse(response);
 
             showResult(
                 emergencyResult,
-                "Submitting emergency alert...",
-                "info"
+                (data.message || "Emergency alert submitted successfully.") +
+                " Status: " + (data.status || "NEW") +
+                ". This website does not automatically contact emergency services.",
+                "success"
             );
 
-            try {
+            emergencyForm.reset();
 
-                const response = await fetch("/api/emergency", {
-                    method: "POST",
-                    credentials: "same-origin",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json"
-                    },
-                    body: JSON.stringify({
-                        alertType: alertType,
-                        details: details
-                    })
-                });
+        } catch (error) {
+            showResult(
+                emergencyResult,
+                error.message ||
+                "A network error occurred while submitting the alert.",
+                "error"
+            );
 
-                const data = await readApiResponse(response);
+            console.error("Emergency submission error:", error);
 
-                showResult(
-                    emergencyResult,
-                    (
-                        data.message ||
-                        "Emergency alert submitted successfully."
-                    ) +
-                    " Status: " +
-                    (data.status || "NEW") +
-                    ". This website does not automatically contact emergency services.",
-                    "success"
-                );
-
-                emergencyForm.reset();
-
-            } catch (error) {
-
-                showResult(
-                    emergencyResult,
-                    error.message ||
-                    "A network error occurred while submitting the alert.",
-                    "error"
-                );
-
-                console.error("Emergency submission error:", error);
-
-            } finally {
-
-                emergencyButton.disabled = false;
-                emergencyButton.textContent = "Send Emergency Alert";
-            }
-        });
-
+        } finally {
+            emergencyButton.disabled = false;
+            emergencyButton.textContent = "Send Emergency Alert";
+        }
     });
+
+});
 </script>
 
 </body>
