@@ -53,51 +53,47 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(auth -> auth
 
-                // Public student website
+                // Public homepage and static resources
                 .requestMatchers(
-                        "/",
-                        "/index.html",
-                        "/favicon.ico",
-                        "/css/**",
-                        "/js/**",
-                        "/images/**"
+                    "/",
+                    "/index.html",
+                    "/favicon.ico",
+                    "/css/**",
+                    "/js/**",
+                    "/images/**"
                 ).permitAll()
 
-                // Public admin login page
+                // Public student APIs
                 .requestMatchers(
-                        "/admin.html",
-                        "/api/csrf"
+                    HttpMethod.POST, "/api/concerns"
                 ).permitAll()
 
-                // Students may submit anonymous concerns
                 .requestMatchers(
-                        HttpMethod.POST,
-                        "/api/concerns"
+                    HttpMethod.GET, "/api/concerns/*"
                 ).permitAll()
 
-                // Students may track a concern by tracking code
                 .requestMatchers(
-                        HttpMethod.GET,
-                        "/api/concerns/*"
+                    HttpMethod.POST, "/api/emergency"
                 ).permitAll()
 
-                // Students may submit emergency alerts
                 .requestMatchers(
-                        HttpMethod.POST,
-                        "/api/emergency"
+                    HttpMethod.GET, "/api/csrf"
                 ).permitAll()
 
-                // Admin dashboard requires authentication
+                // Admin login page
                 .requestMatchers(
-                        "/admin-dashboard.html"
-                ).hasRole("ADMIN")
+                    "/admin.html",
+                    "/login",
+                    "/error"
+                ).permitAll()
 
-                // All other endpoints require administrator access
+                // All other requests require admin authentication.
+                // This includes the admin dashboard and admin APIs.
                 .anyRequest().hasRole("ADMIN")
             )
 
-            // Keep CSRF protection enabled.
-            // Exempt only the public student submission endpoints.
+            // Protect state-changing requests with CSRF.
+            // Exempt only the two public student submission endpoints.
             .csrf(csrf -> csrf
                 .ignoringRequestMatchers(
                     request ->
@@ -106,26 +102,27 @@ public class SecurityConfig {
                             "/api/concerns".equals(
                                 request.getServletPath()
                             )
-                            ||
-                            "/api/emergency".equals(
+                            || "/api/emergency".equals(
                                 request.getServletPath()
                             )
                         )
                 )
             )
 
-            // Administrator login
+            // Admin login
             .formLogin(form -> form
                 .loginPage("/admin.html")
                 .loginProcessingUrl("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/admin-dashboard.html", true)
+                .defaultSuccessUrl(
+                    "/admin-dashboard.html", true
+                )
                 .failureUrl("/admin.html?error")
                 .permitAll()
             )
 
-            // Administrator logout
+            // Logout
             .logout(logout -> logout
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/admin.html?logout")
@@ -135,7 +132,7 @@ public class SecurityConfig {
                 .permitAll()
             )
 
-            // Protect against session fixation
+            // Protect the administrator's session
             .sessionManagement(session ->
                 session.sessionFixation(fixation ->
                     fixation.migrateSession()
