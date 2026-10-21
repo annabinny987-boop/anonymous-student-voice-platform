@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta name="description"
+          content="Anonymous Student Voice Platform — a safe way for students to submit concerns, track responses, and report urgent safety issues.">
+
     <title>Student Voice | Anonymous Student Voice Platform</title>
 
     <style>
@@ -72,8 +75,9 @@
 
         nav {
             display: flex;
-            gap: 18px;
+            gap: 16px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         nav a {
@@ -84,6 +88,14 @@
 
         nav a:hover {
             text-decoration: underline;
+        }
+
+        nav .admin-link {
+            background: white;
+            color: var(--primary-dark);
+            padding: 8px 12px;
+            border-radius: 7px;
+            font-weight: bold;
         }
 
         main {
@@ -126,6 +138,7 @@
         .hero h2 {
             font-size: clamp(30px, 4vw, 44px);
             margin: 10px 0;
+            line-height: 1.2;
         }
 
         .muted {
@@ -180,16 +193,11 @@
             background: #991b1b;
         }
 
-        .button.small {
-            padding: 8px 12px;
-            font-size: 13px;
-            margin: 4px 5px 4px 0;
-        }
-
         .features {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 18px;
+            margin-bottom: 24px;
         }
 
         .feature {
@@ -333,71 +341,8 @@
             background: #fafcff;
         }
 
-        .admin-card {
-            border-top: 5px solid #d69e17;
-        }
-
-        .admin-test-warning {
-            background: var(--warning-bg);
-            border: 1px solid #f0d28b;
-            border-radius: 8px;
-            padding: 13px;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        .alert-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 18px;
-            margin-bottom: 14px;
+        .result-details p {
             overflow-wrap: anywhere;
-        }
-
-        .alert-card.new-alert {
-            border: 2px solid var(--danger);
-            background: #fff3f3;
-        }
-
-        .alert-card h3 {
-            margin-top: 0;
-        }
-
-        .status {
-            display: inline-block;
-            border-radius: 20px;
-            padding: 4px 10px;
-            font-size: 12px;
-            font-weight: bold;
-            background: #e8edf5;
-        }
-
-        .status-new {
-            color: #a11d1d;
-            background: #ffe0e0;
-        }
-
-        .status-acknowledged {
-            color: #875900;
-            background: #fff0c2;
-        }
-
-        .status-resolved {
-            color: #12683b;
-            background: #d9f7e5;
-        }
-
-        .admin-connection {
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-        .empty-state {
-            color: var(--muted);
-            padding: 18px;
-            background: #f8fafc;
-            border-radius: 8px;
         }
 
         footer {
@@ -436,6 +381,7 @@
 
 <header>
     <div class="nav-container">
+
         <div class="brand">
             <h1>Student Voice</h1>
             <p>Anonymous Student Voice Platform</p>
@@ -446,8 +392,9 @@
             <a href="#report">Submit a Concern</a>
             <a href="#track">Track a Concern</a>
             <a href="#emergency">Emergency Alert</a>
-            <a href="#admin-emergencies">Admin Alerts</a>
+            <a href="/admin.html" class="admin-link">Admin Login</a>
         </nav>
+
     </div>
 </header>
 
@@ -455,6 +402,7 @@
 
     <!-- HOME -->
     <section class="card hero" id="home">
+
         <div class="eyebrow">Your voice matters</div>
 
         <h2>A safer space to speak up.</h2>
@@ -472,21 +420,24 @@
         </div>
 
         <div class="warning">
-            <strong>Emergency assistance</strong>
+            <strong>Need emergency assistance?</strong>
+
             <p>
-                Use emergency alerts only for genuine, urgent safety
-                situations. This website does not automatically contact
-                police, ambulance services, or other emergency services.
+                This website does not automatically contact police,
+                ambulance services, or other emergency services.
                 If you are in immediate danger, contact local emergency
                 services or a trusted person who can help.
             </p>
         </div>
+
     </section>
 
     <!-- FEATURES -->
     <section class="features" aria-label="Platform features">
+
         <article class="feature">
             <h3>🔒 Anonymous reporting</h3>
+
             <p>
                 Submit a concern without entering your name or student ID.
                 Avoid including identifying details in your message.
@@ -495,6 +446,7 @@
 
         <article class="feature">
             <h3>📋 Track your concern</h3>
+
             <p>
                 Keep your tracking code and use it to check the status
                 and any available administrator response.
@@ -503,23 +455,27 @@
 
         <article class="feature">
             <h3>🚨 Urgent safety alerts</h3>
+
             <p>
                 Submit a genuine urgent safety alert for administrators
-                to review through the connected dashboard.
+                to review through the protected administrative system.
             </p>
         </article>
+
     </section>
 
     <!-- SUBMIT A CONCERN -->
     <section class="card" id="report">
+
         <h2>Submit an Anonymous Concern</h2>
 
         <p class="muted">
-            Please describe the issue clearly. Do not include your name
+            Describe the issue clearly. Do not include your name
             or other identifying details if you want to remain anonymous.
         </p>
 
         <form id="reportForm">
+
             <div class="field">
                 <label for="category">Concern category</label>
 
@@ -547,9 +503,7 @@
                     required
                 ></textarea>
 
-                <p class="help-text">
-                    Maximum 5000 characters.
-                </p>
+                <p class="help-text">Maximum 5000 characters.</p>
             </div>
 
             <p class="help-text">
@@ -568,11 +522,14 @@
                 role="status"
                 aria-live="polite"
             ></div>
+
         </form>
+
     </section>
 
     <!-- TRACK A CONCERN -->
     <section class="card" id="track">
+
         <h2>Track a Concern</h2>
 
         <p class="muted">
@@ -581,6 +538,7 @@
         </p>
 
         <form id="trackForm">
+
             <div class="field">
                 <label for="trackingCode">Tracking code</label>
 
@@ -589,6 +547,7 @@
                     id="trackingCode"
                     maxlength="40"
                     placeholder="Example: ASVP-ABC123"
+                    autocomplete="off"
                     required
                 >
             </div>
@@ -603,11 +562,14 @@
                 role="status"
                 aria-live="polite"
             ></div>
+
         </form>
+
     </section>
 
-    <!-- EMERGENCY ALERT -->
+    <!-- PUBLIC EMERGENCY SUBMISSION FORM -->
     <section class="card emergency-card" id="emergency">
+
         <h2>🚨 Emergency Safety Alert</h2>
 
         <div class="warning emergency-warning">
@@ -628,6 +590,7 @@
         </div>
 
         <form id="emergencyForm">
+
             <div class="field">
                 <label for="emergencyType">
                     Type of urgent situation
@@ -685,7 +648,11 @@
                 </label>
             </div>
 
-            <button class="button danger" id="emergencyButton" type="submit">
+            <button
+                class="button danger"
+                id="emergencyButton"
+                type="submit"
+            >
                 Send Emergency Alert
             </button>
 
@@ -695,34 +662,16 @@
                 role="status"
                 aria-live="polite"
             ></div>
+
         </form>
-    </section>
 
-    <!-- ADMIN EMERGENCY DASHBOARD -->
-    <section class="card admin-card" id="admin-emergencies">
-        <h2>🚨 Emergency Alert Dashboard</h2>
-
-        <div class="admin-test-warning">
-            <strong>Development mode only:</strong>
-            This dashboard is not protected by administrator login.
-            Do not deploy it publicly or use it for real student safety
-            reports until server-side authentication and authorization
-            have been implemented.
-        </div>
-
-        <p class="admin-connection" id="emergencyConnectionStatus">
-            Connecting to the server...
-        </p>
-
-        <div id="adminEmergencyAlerts" aria-live="polite">
-            <p class="empty-state">Loading emergency alerts...</p>
-        </div>
     </section>
 
 </main>
 
 <footer>
-    Student Voice · Speak up safely
+    <p>Student Voice · Speak up safely</p>
+    <p>Anonymous Student Voice Platform</p>
 </footer>
 
 <script>
@@ -740,16 +689,8 @@
         const trackResult = document.getElementById("trackResult");
         const emergencyResult = document.getElementById("emergencyResult");
 
-        const adminEmergencyAlerts =
-            document.getElementById("adminEmergencyAlerts");
-
-        const emergencyConnectionStatus =
-            document.getElementById("emergencyConnectionStatus");
-
-        let previousNewAlertIds = new Set();
-
         /*
-         * Display messages safely using textContent.
+         * Display a message safely.
          */
         function showResult(element, message, type) {
             element.textContent = message;
@@ -757,7 +698,7 @@
         }
 
         /*
-         * Parse JSON responses safely.
+         * Read a response without assuming it is JSON.
          */
         async function readResponse(response) {
             const text = await response.text();
@@ -774,7 +715,7 @@
         }
 
         /*
-         * Extract a useful error message from an API response.
+         * Extract an error message from the server.
          */
         function getErrorMessage(data, fallback) {
             if (data && typeof data.message === "string") {
@@ -790,7 +731,7 @@
 
         /*
          * Submit a concern.
-         * Backend: POST /api/concerns
+         * POST /api/concerns
          */
         reportForm.addEventListener("submit", async function (event) {
             event.preventDefault();
@@ -823,7 +764,8 @@
                 const response = await fetch("/api/concerns", {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
                     },
                     body: JSON.stringify({
                         category: category,
@@ -837,7 +779,7 @@
                     throw new Error(
                         getErrorMessage(
                             data,
-                            "Could not submit the concern."
+                            "Could not submit the concern. Please try again."
                         )
                     );
                 }
@@ -854,10 +796,14 @@
 
                 const codeElement = document.createElement("span");
                 codeElement.className = "tracking-code";
+
                 codeElement.textContent =
-                    data.trackingCode || "Tracking code unavailable";
+                    data.trackingCode ||
+                    data.tracking_code ||
+                    "Tracking code unavailable";
 
                 reportResult.className = "notice success";
+
                 reportResult.append(
                     messageElement,
                     codeLabel,
@@ -865,9 +811,6 @@
                 );
 
                 reportForm.reset();
-
-                // Refresh the dashboard in case an alert was also submitted.
-                loadAdminEmergencyAlerts();
 
             } catch (error) {
                 showResult(
@@ -883,7 +826,7 @@
 
         /*
          * Track a concern.
-         * Backend: GET /api/concerns/{trackingCode}
+         * GET /api/concerns/{trackingCode}
          */
         trackForm.addEventListener("submit", async function (event) {
             event.preventDefault();
@@ -903,11 +846,21 @@
             trackButton.disabled = true;
             trackButton.textContent = "Checking...";
 
-            showResult(trackResult, "Checking concern status...", "info");
+            showResult(
+                trackResult,
+                "Checking concern status...",
+                "info"
+            );
 
             try {
                 const response = await fetch(
-                    "/api/concerns/" + encodeURIComponent(code)
+                    "/api/concerns/" + encodeURIComponent(code),
+                    {
+                        headers: {
+                            "Accept": "application/json"
+                        },
+                        cache: "no-store"
+                    }
                 );
 
                 const data = await readResponse(response);
@@ -926,7 +879,8 @@
 
                 const codeHeading = document.createElement("p");
                 codeHeading.textContent =
-                    "Tracking code: " + (data.tracking_code || code);
+                    "Tracking code: " +
+                    (data.tracking_code || data.trackingCode || code);
 
                 const category = document.createElement("p");
                 category.textContent =
@@ -939,7 +893,9 @@
                 const reply = document.createElement("p");
                 reply.textContent =
                     "Administrator response: " +
-                    (data.admin_reply || "No response has been added yet.");
+                    (data.admin_reply ||
+                     data.adminReply ||
+                     "No response has been added yet.");
 
                 resultBox.append(
                     codeHeading,
@@ -965,7 +921,7 @@
 
         /*
          * Submit an emergency alert.
-         * Backend: POST /api/emergency
+         * POST /api/emergency
          */
         emergencyForm.addEventListener("submit", async function (event) {
             event.preventDefault();
@@ -1010,7 +966,8 @@
                 const response = await fetch("/api/emergency", {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
                     },
                     body: JSON.stringify({
                         alertType: alertType,
@@ -1031,22 +988,18 @@
 
                 showResult(
                     emergencyResult,
-                    (data.message || "Emergency alert submitted.") +
-                    " Status: " + (data.status || "NEW") +
-                    ". This website does not automatically contact emergency services.",
+                    (data.message || "Emergency alert submitted successfully.") +
+                    " This website does not automatically contact emergency services.",
                     "success"
                 );
 
                 emergencyForm.reset();
 
-                // Refresh the dashboard immediately after submission.
-                await loadAdminEmergencyAlerts();
-
             } catch (error) {
                 showResult(
                     emergencyResult,
                     error.message ||
-                        "A network error occurred while sending the alert.",
+                    "A network error occurred while sending the alert.",
                     "error"
                 );
             } finally {
@@ -1054,224 +1007,6 @@
                 emergencyButton.textContent = "Send Emergency Alert";
             }
         });
-
-        /*
-         * Create dashboard elements without inserting server text as HTML.
-         */
-        function createTextElement(tag, text, className) {
-            const element = document.createElement(tag);
-            element.textContent = text;
-
-            if (className) {
-                element.className = className;
-            }
-
-            return element;
-        }
-
-        /*
-         * Retrieve emergency alerts.
-         * Backend: GET /api/emergency
-         */
-        async function loadAdminEmergencyAlerts() {
-            try {
-                const response = await fetch("/api/emergency", {
-                    cache: "no-store"
-                });
-
-                const data = await readResponse(response);
-
-                if (!response.ok) {
-                    throw new Error(
-                        getErrorMessage(
-                            data,
-                            "Unable to retrieve emergency alerts."
-                        )
-                    );
-                }
-
-                if (!Array.isArray(data)) {
-                    throw new Error(
-                        "The server returned an unexpected alert response."
-                    );
-                }
-
-                emergencyConnectionStatus.textContent =
-                    "Connected · Last checked: " +
-                    new Date().toLocaleTimeString();
-
-                const currentNewAlertIds = new Set();
-                adminEmergencyAlerts.replaceChildren();
-
-                if (data.length === 0) {
-                    adminEmergencyAlerts.appendChild(
-                        createTextElement(
-                            "p",
-                            "No emergency alerts have been submitted.",
-                            "empty-state"
-                        )
-                    );
-
-                    previousNewAlertIds.clear();
-                    return;
-                }
-
-                data.forEach(function (alert) {
-                    const card = document.createElement("article");
-
-                    card.className = "alert-card";
-
-                    if (alert.status === "NEW") {
-                        card.classList.add("new-alert");
-                        currentNewAlertIds.add(alert.id);
-
-                        if (!previousNewAlertIds.has(alert.id)) {
-                            console.warn(
-                                "New emergency alert received:",
-                                alert.id,
-                                alert.alert_type
-                            );
-                        }
-                    }
-
-                    const title = createTextElement(
-                        "h3",
-                        (alert.status === "NEW" ? "🚨 NEW ALERT: " : "Alert: ") +
-                        (alert.alert_type || "Unspecified emergency")
-                    );
-
-                    const statusClass =
-                        alert.status === "NEW"
-                            ? "status status-new"
-                            : alert.status === "ACKNOWLEDGED"
-                                ? "status status-acknowledged"
-                                : "status status-resolved";
-
-                    const status = createTextElement(
-                        "span",
-                        "Status: " + (alert.status || "Unknown"),
-                        statusClass
-                    );
-
-                    const details = createTextElement(
-                        "p",
-                        "Details and location: " +
-                        (alert.details || "No details provided.")
-                    );
-
-                    const createdAt = createTextElement(
-                        "p",
-                        "Submitted: " +
-                        (alert.created_at || "Time unavailable"),
-                        "muted"
-                    );
-
-                    card.append(title, status, details, createdAt);
-
-                    if (alert.status === "NEW") {
-                        const acknowledgeButton =
-                            document.createElement("button");
-
-                        acknowledgeButton.type = "button";
-                        acknowledgeButton.className = "button small";
-                        acknowledgeButton.textContent = "Acknowledge Alert";
-
-                        acknowledgeButton.addEventListener("click", function () {
-                            updateEmergencyAlertStatus(
-                                alert.id,
-                                "ACKNOWLEDGED",
-                                acknowledgeButton
-                            );
-                        });
-
-                        card.appendChild(acknowledgeButton);
-                    }
-
-                    if (alert.status === "ACKNOWLEDGED") {
-                        const resolveButton =
-                            document.createElement("button");
-
-                        resolveButton.type = "button";
-                        resolveButton.className = "button small";
-                        resolveButton.textContent = "Mark as Resolved";
-
-                        resolveButton.addEventListener("click", function () {
-                            updateEmergencyAlertStatus(
-                                alert.id,
-                                "RESOLVED",
-                                resolveButton
-                            );
-                        });
-
-                        card.appendChild(resolveButton);
-                    }
-
-                    adminEmergencyAlerts.appendChild(card);
-                });
-
-                previousNewAlertIds = currentNewAlertIds;
-
-            } catch (error) {
-                emergencyConnectionStatus.textContent =
-                    "Could not load alerts. Check that the Spring Boot server is running.";
-
-                console.error("Emergency dashboard error:", error);
-            }
-        }
-
-        /*
-         * Update an emergency alert's status.
-         * Backend: PUT /api/emergency/{id}/status
-         */
-        async function updateEmergencyAlertStatus(id, status, button) {
-            button.disabled = true;
-
-            try {
-                const response = await fetch(
-                    "/api/emergency/" + encodeURIComponent(id) + "/status",
-                    {
-                        method: "PUT",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            status: status
-                        })
-                    }
-                );
-
-                const data = await readResponse(response);
-
-                if (!response.ok) {
-                    throw new Error(
-                        getErrorMessage(
-                            data,
-                            "Could not update the emergency alert."
-                        )
-                    );
-                }
-
-                await loadAdminEmergencyAlerts();
-
-            } catch (error) {
-                alert(
-                    error.message ||
-                    "Could not update the alert. Please try again."
-                );
-
-                button.disabled = false;
-                console.error("Alert status update error:", error);
-            }
-        }
-
-        /*
-         * Initial dashboard load and five-second refresh.
-         */
-        loadAdminEmergencyAlerts();
-
-        window.setInterval(function () {
-            loadAdminEmergencyAlerts();
-        }, 5000);
 
     });
 </script>
