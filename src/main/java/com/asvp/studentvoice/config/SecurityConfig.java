@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,11 +17,17 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 public class SecurityConfig {
 
+    /*
+     * Password encoder
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /*
+     * Load administrator credentials from environment variables.
+     */
     @Bean
     public UserDetailsService userDetailsService(
             PasswordEncoder passwordEncoder) {
@@ -32,9 +37,11 @@ public class SecurityConfig {
 
         if (username == null || username.isBlank()
                 || password == null || password.isBlank()) {
+
             throw new IllegalStateException(
-                    "Admin credentials are missing. Set "
-                    + "ASVP_ADMIN_USERNAME and ASVP_ADMIN_PASSWORD."
+                    "Admin credentials are missing. Configure "
+                    + "ASVP_ADMIN_USERNAME and ASVP_ADMIN_PASSWORD "
+                    + "in the deployment environment."
             );
         }
 
@@ -47,24 +54,46 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(admin);
     }
 
+    /*
+     * Configure authentication, authorization, CSRF and sessions.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(
             HttpSecurity http) throws Exception {
 
         http
-            // CSRF protection: exempt only public student submissions
+
+            /*
+             * Keep CSRF protection enabled.
+             *
+             * Exempt only the two public POST submission endpoints.
+             * Login and administrative actions remain CSRF-protected.
+             */
             .csrf(csrf -> csrf
                 .ignoringRequestMatchers(
-                    request -> "POST".equals(request.getMethod())
-                            && ("/api/concerns".equals(request.getServletPath())
-                            || "/api/emergency".equals(request.getServletPath()))
+                    request ->
+                        "POST".equals(request.getMethod())
+                        && (
+                            "/api/concerns".equals(
+                                request.getServletPath()
+                            )
+                            ||
+                            "/api/emergency".equals(
+                                request.getServletPath()
+                            )
+                        )
                 )
             )
 
-            // Access permissions
+            /*
+             * Authorization rules.
+             *
+             * Administrative endpoints are explicitly protected
+             * before the public concern-tracking rule.
+             */
             .authorizeHttpRequests(auth -> auth
 
-                // Public website pages
+                // Public website and login page
                 .requestMatchers(
                     "/",
                     "/index.html",
@@ -75,47 +104,65 @@ public class SecurityConfig {
                     "/images/**"
                 ).permitAll()
 
-                // Students can submit concerns
+                // Public concern submission
                 .requestMatchers(
-                    HttpMethod.POST, "/api/concerns"
+                    HttpMethod.POST,
+                    "/api/concerns"
                 ).permitAll()
 
-                // Students can track concerns using their tracking codes
+                // Public emergency submission
                 .requestMatchers(
-                    HttpMethod.GET, "/api/concerns/*"
-                ).permitAll()
-
-                // Students can submit emergency alerts
-                .requestMatchers(
-                    HttpMethod.POST, "/api/emergency"
+                    HttpMethod.POST,
+                    "/api/emergency"
                 ).permitAll()
 
                 // CSRF token endpoint
                 .requestMatchers(
-                    HttpMethod.GET, "/api/csrf"
+                    HttpMethod.GET,
+                    "/api/csrf"
                 ).permitAll()
 
-                // Admin dashboard
+                // Admin-only dashboard and management APIs
                 .requestMatchers(
-                    "/admin-dashboard.html"
+                    "/admin-dashboard.html",
+                    "/api/concerns/admin",
+                    "/api/concerns/admin/**",
+                    "/api/emergency",
+                    "/api/emergency/**"
                 ).hasRole("ADMIN")
 
-                // Everything else requires admin authentication
+                // Public concern tracking
+                .requestMatchers(
+                    HttpMethod.GET,
+                    "/api/concerns/*"
+                ).permitAll()
+
+                // All other endpoints require admin authorization
                 .anyRequest().hasRole("ADMIN")
             )
 
-            // Login
+            /*
+             * Spring Security form login.
+             *
+             * admin.html must submit username and password
+             * as a normal POST form to /login.
+             */
             .formLogin(form -> form
                 .loginPage("/admin.html")
                 .loginProcessingUrl("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/admin-dashboard.html", true)
+                .defaultSuccessUrl(
+                    "/admin-dashboard.html",
+                    true
+                )
                 .failureUrl("/admin.html?error")
                 .permitAll()
             )
 
-            // Logout
+            /*
+             * Logout
+             */
             .logout(logout -> logout
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/admin.html?logout")
@@ -125,7 +172,9 @@ public class SecurityConfig {
                 .permitAll()
             )
 
-            // Session protection
+            /*
+             * Session fixation protection
+             */
             .sessionManagement(session ->
                 session.sessionFixation(fixation ->
                     fixation.migrateSession()
