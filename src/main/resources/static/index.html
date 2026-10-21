@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="Anonymous Student Voice Platform — a safe way for students to submit concerns, track responses, and report urgent safety issues.">
 
     <title>Student Voice | Anonymous Student Voice Platform</title>
 
@@ -75,9 +73,8 @@
 
         nav {
             display: flex;
-            gap: 16px;
+            gap: 18px;
             flex-wrap: wrap;
-            align-items: center;
         }
 
         nav a {
@@ -88,14 +85,6 @@
 
         nav a:hover {
             text-decoration: underline;
-        }
-
-        nav .admin-link {
-            background: white;
-            color: var(--primary-dark);
-            padding: 8px 12px;
-            border-radius: 7px;
-            font-weight: bold;
         }
 
         main {
@@ -138,7 +127,6 @@
         .hero h2 {
             font-size: clamp(30px, 4vw, 44px);
             margin: 10px 0;
-            line-height: 1.2;
         }
 
         .muted {
@@ -325,10 +313,10 @@
             display: inline-block;
             background: #e7f0ff;
             color: #173b91;
-            padding: 5px 9px;
+            padding: 8px 12px;
             border-radius: 5px;
             font-family: monospace;
-            font-size: 16px;
+            font-size: 17px;
             font-weight: bold;
             overflow-wrap: anywhere;
         }
@@ -341,8 +329,8 @@
             background: #fafcff;
         }
 
-        .result-details p {
-            overflow-wrap: anywhere;
+        .tracking-result {
+            margin-top: 12px;
         }
 
         footer {
@@ -392,7 +380,6 @@
             <a href="#report">Submit a Concern</a>
             <a href="#track">Track a Concern</a>
             <a href="#emergency">Emergency Alert</a>
-            <a href="/admin.html" class="admin-link">Admin Login</a>
         </nav>
 
     </div>
@@ -415,16 +402,23 @@
 
         <div class="actions">
             <a class="button" href="#report">Submit a Concern</a>
-            <a class="button secondary" href="#track">Track a Concern</a>
-            <a class="button danger" href="#emergency">Emergency Alert</a>
+
+            <a class="button secondary" href="#track">
+                Track a Concern
+            </a>
+
+            <a class="button danger" href="#emergency">
+                Emergency Alert
+            </a>
         </div>
 
         <div class="warning">
-            <strong>Need emergency assistance?</strong>
+            <strong>Emergency assistance</strong>
 
             <p>
-                This website does not automatically contact police,
-                ambulance services, or other emergency services.
+                Use emergency alerts only for genuine, urgent safety
+                situations. This website does not automatically contact
+                police, ambulance services, or other emergency services.
                 If you are in immediate danger, contact local emergency
                 services or a trusted person who can help.
             </p>
@@ -432,7 +426,7 @@
 
     </section>
 
-    <!-- FEATURES -->
+    <!-- PLATFORM FEATURES -->
     <section class="features" aria-label="Platform features">
 
         <article class="feature">
@@ -458,7 +452,7 @@
 
             <p>
                 Submit a genuine urgent safety alert for administrators
-                to review through the protected administrative system.
+                to review through the secured administrative dashboard.
             </p>
         </article>
 
@@ -470,7 +464,7 @@
         <h2>Submit an Anonymous Concern</h2>
 
         <p class="muted">
-            Describe the issue clearly. Do not include your name
+            Please describe the issue clearly. Do not include your name
             or other identifying details if you want to remain anonymous.
         </p>
 
@@ -503,7 +497,9 @@
                     required
                 ></textarea>
 
-                <p class="help-text">Maximum 5000 characters.</p>
+                <p class="help-text">
+                    Maximum 5000 characters.
+                </p>
             </div>
 
             <p class="help-text">
@@ -512,7 +508,11 @@
                 person who can help.
             </p>
 
-            <button class="button" id="submitButton" type="submit">
+            <button
+                class="button"
+                id="submitButton"
+                type="submit"
+            >
                 Submit Concern
             </button>
 
@@ -547,12 +547,15 @@
                     id="trackingCode"
                     maxlength="40"
                     placeholder="Example: ASVP-ABC123"
-                    autocomplete="off"
                     required
                 >
             </div>
 
-            <button class="button" id="trackButton" type="submit">
+            <button
+                class="button"
+                id="trackButton"
+                type="submit"
+            >
                 Check Status
             </button>
 
@@ -567,12 +570,13 @@
 
     </section>
 
-    <!-- PUBLIC EMERGENCY SUBMISSION FORM -->
+    <!-- EMERGENCY ALERT SUBMISSION -->
     <section class="card emergency-card" id="emergency">
 
         <h2>🚨 Emergency Safety Alert</h2>
 
         <div class="warning emergency-warning">
+
             <strong>Read before sending</strong>
 
             <p>
@@ -587,6 +591,7 @@
                 in immediate danger. Contact local emergency services
                 or a trusted person who can help.
             </p>
+
         </div>
 
         <form id="emergencyForm">
@@ -598,18 +603,23 @@
 
                 <select id="emergencyType" required>
                     <option value="">Select a situation</option>
+
                     <option value="Immediate physical danger">
                         Immediate physical danger
                     </option>
+
                     <option value="Medical emergency">
                         Medical emergency
                     </option>
+
                     <option value="Threat or violence">
                         Threat or violence
                     </option>
+
                     <option value="Fire or other hazard">
                         Fire or other hazard
                     </option>
+
                     <option value="Other urgent safety threat">
                         Other urgent safety threat
                     </option>
@@ -635,6 +645,7 @@
             </div>
 
             <div class="checkbox-row">
+
                 <input
                     type="checkbox"
                     id="emergencyConfirm"
@@ -646,6 +657,7 @@
                     and understand that this website does not
                     automatically contact emergency services.
                 </label>
+
             </div>
 
             <button
@@ -670,8 +682,7 @@
 </main>
 
 <footer>
-    <p>Student Voice · Speak up safely</p>
-    <p>Anonymous Student Voice Platform</p>
+    Student Voice · Speak up safely
 </footer>
 
 <script>
@@ -698,42 +709,75 @@
         }
 
         /*
-         * Read a response without assuming it is JSON.
+         * Read and validate a server response.
+         *
+         * HTML responses are rejected instead of being displayed
+         * as successful API responses.
          */
-        async function readResponse(response) {
-            const text = await response.text();
+        async function readApiResponse(response) {
 
-            if (!text) {
-                return {};
+            const contentType =
+                response.headers.get("content-type") || "";
+
+            const responseText = await response.text();
+
+            if (response.redirected) {
+                const finalUrl = new URL(response.url);
+
+                if (finalUrl.pathname === "/admin.html") {
+                    throw new Error(
+                        "The server redirected the request to the admin " +
+                        "login page. Please check the server security settings."
+                    );
+                }
             }
+
+            if (!contentType.toLowerCase().includes("application/json")) {
+                console.error(
+                    "Unexpected API response:",
+                    response.status,
+                    contentType,
+                    responseText.substring(0, 300)
+                );
+
+                throw new Error(
+                    "The server returned an unexpected response instead " +
+                    "of JSON. Please check the server configuration."
+                );
+            }
+
+            let data;
 
             try {
-                return JSON.parse(text);
+                data = responseText ? JSON.parse(responseText) : {};
             } catch {
-                return { message: text };
+                throw new Error(
+                    "The server returned invalid JSON. Please try again."
+                );
             }
+
+            if (!response.ok) {
+
+                const errorMessage =
+                    data.detail ||
+                    data.message ||
+                    data.error ||
+                    "The request failed. Please try again.";
+
+                throw new Error(errorMessage);
+            }
+
+            return data;
         }
 
         /*
-         * Extract an error message from the server.
-         */
-        function getErrorMessage(data, fallback) {
-            if (data && typeof data.message === "string") {
-                return data.message;
-            }
-
-            if (data && typeof data.error === "string") {
-                return data.error;
-            }
-
-            return fallback;
-        }
-
-        /*
-         * Submit a concern.
+         * SUBMIT A CONCERN
+         *
+         * Backend endpoint:
          * POST /api/concerns
          */
         reportForm.addEventListener("submit", async function (event) {
+
             event.preventDefault();
 
             const category =
@@ -751,6 +795,15 @@
                 return;
             }
 
+            if (message.length > 5000) {
+                showResult(
+                    reportResult,
+                    "Your concern cannot exceed 5000 characters.",
+                    "error"
+                );
+                return;
+            }
+
             submitButton.disabled = true;
             submitButton.textContent = "Submitting...";
 
@@ -761,8 +814,10 @@
             );
 
             try {
+
                 const response = await fetch("/api/concerns", {
                     method: "POST",
+                    credentials: "same-origin",
                     headers: {
                         "Content-Type": "application/json",
                         "Accept": "application/json"
@@ -773,62 +828,92 @@
                     })
                 });
 
-                const data = await readResponse(response);
+                const data = await readApiResponse(response);
 
-                if (!response.ok) {
+                /*
+                 * The backend must return the tracking code.
+                 */
+                if (
+                    typeof data.trackingCode !== "string" ||
+                    !data.trackingCode.trim()
+                ) {
                     throw new Error(
-                        getErrorMessage(
-                            data,
-                            "Could not submit the concern. Please try again."
-                        )
+                        "The server did not return a tracking code. " +
+                        "Please check the backend response."
                     );
                 }
 
+                /*
+                 * Display the success message and tracking code safely.
+                 */
                 reportResult.replaceChildren();
 
-                const messageElement = document.createElement("p");
-                messageElement.textContent =
+                const successMessage = document.createElement("p");
+
+                successMessage.textContent =
                     data.message || "Concern submitted successfully.";
 
-                const codeLabel = document.createElement("p");
-                codeLabel.textContent =
-                    "Save your tracking code somewhere safe:";
+                const instruction = document.createElement("p");
+
+                instruction.textContent =
+                    "Save this tracking code. You will need it to check " +
+                    "the status of your concern:";
 
                 const codeElement = document.createElement("span");
-                codeElement.className = "tracking-code";
 
-                codeElement.textContent =
-                    data.trackingCode ||
-                    data.tracking_code ||
-                    "Tracking code unavailable";
+                codeElement.className = "tracking-code";
+                codeElement.textContent = data.trackingCode;
+
+                const codeContainer = document.createElement("div");
+
+                codeContainer.className = "tracking-result";
+                codeContainer.appendChild(codeElement);
 
                 reportResult.className = "notice success";
 
                 reportResult.append(
-                    messageElement,
-                    codeLabel,
-                    codeElement
+                    successMessage,
+                    instruction,
+                    codeContainer
                 );
 
+                /*
+                 * Reset the form only after successful submission.
+                 */
                 reportForm.reset();
 
+                /*
+                 * Fill the tracking form with the newly generated code.
+                 */
+                document.getElementById("trackingCode").value =
+                    data.trackingCode;
+
             } catch (error) {
+
                 showResult(
                     reportResult,
-                    error.message || "A network error occurred.",
+                    error.message ||
+                    "A network error occurred while submitting your concern.",
                     "error"
                 );
+
+                console.error("Concern submission error:", error);
+
             } finally {
+
                 submitButton.disabled = false;
                 submitButton.textContent = "Submit Concern";
             }
         });
 
         /*
-         * Track a concern.
+         * TRACK A CONCERN
+         *
+         * Backend endpoint:
          * GET /api/concerns/{trackingCode}
          */
         trackForm.addEventListener("submit", async function (event) {
+
             event.preventDefault();
 
             const code = document.getElementById("trackingCode")
@@ -853,77 +938,87 @@
             );
 
             try {
+
                 const response = await fetch(
                     "/api/concerns/" + encodeURIComponent(code),
                     {
+                        method: "GET",
+                        credentials: "same-origin",
                         headers: {
                             "Accept": "application/json"
-                        },
-                        cache: "no-store"
+                        }
                     }
                 );
 
-                const data = await readResponse(response);
-
-                if (!response.ok) {
-                    throw new Error(
-                        getErrorMessage(
-                            data,
-                            "No matching concern was found."
-                        )
-                    );
-                }
+                const data = await readApiResponse(response);
 
                 const resultBox = document.createElement("div");
+
                 resultBox.className = "result-details";
 
-                const codeHeading = document.createElement("p");
-                codeHeading.textContent =
+                const codeElement = document.createElement("p");
+
+                codeElement.textContent =
                     "Tracking code: " +
-                    (data.tracking_code || data.trackingCode || code);
+                    (data.tracking_code || code);
 
-                const category = document.createElement("p");
-                category.textContent =
-                    "Category: " + (data.category || "Not provided");
+                const categoryElement = document.createElement("p");
 
-                const status = document.createElement("p");
-                status.textContent =
-                    "Status: " + (data.status || "Pending");
+                categoryElement.textContent =
+                    "Category: " +
+                    (data.category || "Not provided");
 
-                const reply = document.createElement("p");
-                reply.textContent =
+                const statusElement = document.createElement("p");
+
+                statusElement.textContent =
+                    "Status: " +
+                    (data.status || "Pending");
+
+                const replyElement = document.createElement("p");
+
+                replyElement.textContent =
                     "Administrator response: " +
-                    (data.admin_reply ||
-                     data.adminReply ||
-                     "No response has been added yet.");
+                    (
+                        data.admin_reply ||
+                        "No response has been added yet."
+                    );
 
                 resultBox.append(
-                    codeHeading,
-                    category,
-                    status,
-                    reply
+                    codeElement,
+                    categoryElement,
+                    statusElement,
+                    replyElement
                 );
 
                 trackResult.replaceChildren(resultBox);
                 trackResult.className = "notice success";
 
             } catch (error) {
+
                 showResult(
                     trackResult,
-                    error.message || "A network error occurred.",
+                    error.message ||
+                    "A network error occurred while checking the concern.",
                     "error"
                 );
+
+                console.error("Concern tracking error:", error);
+
             } finally {
+
                 trackButton.disabled = false;
                 trackButton.textContent = "Check Status";
             }
         });
 
         /*
-         * Submit an emergency alert.
+         * SUBMIT AN EMERGENCY ALERT
+         *
+         * Backend endpoint:
          * POST /api/emergency
          */
         emergencyForm.addEventListener("submit", async function (event) {
+
             event.preventDefault();
 
             const alertType =
@@ -936,20 +1031,35 @@
                 document.getElementById("emergencyConfirm").checked;
 
             if (!alertType || !details) {
+
                 showResult(
                     emergencyResult,
                     "Select a situation and enter the details.",
                     "error"
                 );
+
+                return;
+            }
+
+            if (details.length > 2000) {
+
+                showResult(
+                    emergencyResult,
+                    "Emergency details cannot exceed 2000 characters.",
+                    "error"
+                );
+
                 return;
             }
 
             if (!confirmed) {
+
                 showResult(
                     emergencyResult,
                     "Please confirm that this is a genuine, urgent safety concern.",
                     "error"
                 );
+
                 return;
             }
 
@@ -963,8 +1073,10 @@
             );
 
             try {
+
                 const response = await fetch("/api/emergency", {
                     method: "POST",
+                    credentials: "same-origin",
                     headers: {
                         "Content-Type": "application/json",
                         "Accept": "application/json"
@@ -975,34 +1087,35 @@
                     })
                 });
 
-                const data = await readResponse(response);
-
-                if (!response.ok) {
-                    throw new Error(
-                        getErrorMessage(
-                            data,
-                            "The emergency alert could not be submitted."
-                        )
-                    );
-                }
+                const data = await readApiResponse(response);
 
                 showResult(
                     emergencyResult,
-                    (data.message || "Emergency alert submitted successfully.") +
-                    " This website does not automatically contact emergency services.",
+                    (
+                        data.message ||
+                        "Emergency alert submitted successfully."
+                    ) +
+                    " Status: " +
+                    (data.status || "NEW") +
+                    ". This website does not automatically contact emergency services.",
                     "success"
                 );
 
                 emergencyForm.reset();
 
             } catch (error) {
+
                 showResult(
                     emergencyResult,
                     error.message ||
-                    "A network error occurred while sending the alert.",
+                    "A network error occurred while submitting the alert.",
                     "error"
                 );
+
+                console.error("Emergency submission error:", error);
+
             } finally {
+
                 emergencyButton.disabled = false;
                 emergencyButton.textContent = "Send Emergency Alert";
             }
