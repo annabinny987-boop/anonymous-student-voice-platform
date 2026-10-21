@@ -337,12 +337,118 @@
             margin: 8px 0;
         }
 
+        /* NEW: Emergency Contacts Directory */
+
+        .emergency-directory {
+            border-top: 5px solid var(--danger);
+        }
+
+        .emergency-directory-intro {
+            margin-bottom: 22px;
+            color: var(--muted);
+        }
+
+        .emergency-directory-warning {
+            background: var(--danger-bg);
+            border: 1px solid #f1b5b5;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 24px;
+        }
+
+        .emergency-directory-warning strong {
+            color: #991b1b;
+        }
+
+        .emergency-contact-group {
+            margin-top: 28px;
+        }
+
+        .emergency-contact-group h3 {
+            margin-bottom: 14px;
+            font-size: 19px;
+            color: var(--primary-dark);
+        }
+
+        .emergency-contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .emergency-contact-card {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 19px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(26, 48, 80, 0.04);
+            min-width: 0;
+        }
+
+        .emergency-contact-icon {
+            font-size: 27px;
+            margin-bottom: 8px;
+        }
+
+        .emergency-contact-card h4 {
+            margin: 0 0 6px;
+            font-size: 16px;
+        }
+
+        .emergency-contact-card p {
+            margin: 0 0 12px;
+            color: var(--muted);
+            font-size: 13px;
+            overflow-wrap: anywhere;
+        }
+
+        .emergency-contact-number {
+            display: inline-block;
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary-dark);
+            text-decoration: none;
+            margin-top: auto;
+            padding: 5px 0;
+            overflow-wrap: anywhere;
+        }
+
+        .emergency-contact-number:hover {
+            text-decoration: underline;
+        }
+
+        .emergency-contact-label {
+            display: inline-block;
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .emergency-contact-note {
+            margin-top: 22px;
+            padding: 14px;
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
         footer {
             margin-top: 40px;
             padding: 25px 20px;
             text-align: center;
             color: #d7e2f4;
             background: #172b4d;
+        }
+
+        @media (max-width: 850px) {
+            .emergency-contact-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
         }
 
         @media (max-width: 760px) {
@@ -366,6 +472,12 @@
                 padding: 30px 22px;
             }
         }
+
+        @media (max-width: 520px) {
+            .emergency-contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
@@ -383,6 +495,8 @@
             <a href="#report">Submit a Concern</a>
             <a href="#track">Track a Concern</a>
             <a href="#emergency">Emergency Alert</a>
+            <!-- NEW: Navigation link -->
+            <a href="#emergency-contacts">Emergency Contacts</a>
         </nav>
     </div>
 </header>
@@ -538,7 +652,7 @@
         </form>
     </section>
 
-    <!-- EMERGENCY ALERT -->
+    <!-- EXISTING EMERGENCY ALERT -->
     <section class="card emergency-card" id="emergency">
         <h2>🚨 Emergency Safety Alert</h2>
 
@@ -613,6 +727,302 @@
             ></div>
         </form>
     </section>
+
+    <!-- NEW: EMERGENCY CONTACT DIRECTORY -->
+    <section class="card emergency-directory" id="emergency-contacts">
+
+        <div class="eyebrow">Help when you need it</div>
+
+        <h2>📞 Emergency Contacts &amp; Helplines</h2>
+
+        <p class="emergency-directory-intro">
+            Keep important emergency numbers handy. Select a phone number
+            to open the calling application on a compatible device.
+        </p>
+
+        <div class="emergency-directory-warning">
+            <strong>🚨 Immediate danger? Call 112.</strong>
+            <p>
+                The emergency numbers listed here are provided for assistance.
+                Local contact details may change, and availability can vary.
+                For immediate danger, use the official emergency number.
+            </p>
+        </div>
+
+        <!-- NATIONAL HELPLINES -->
+        <div class="emergency-contact-group">
+            <h3>🇮🇳 National Emergency Helplines</h3>
+
+            <div class="emergency-contact-grid">
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">🚨</div>
+                    <h4>National Emergency Response</h4>
+                    <p>Police, fire, medical emergencies and other urgent assistance.</p>
+                    <a class="emergency-contact-number" href="tel:112">112</a>
+                    <span class="emergency-contact-label">Emergency services</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">👮</div>
+                    <h4>Police Helpline</h4>
+                    <p>Police assistance for crimes, threats and safety concerns.</p>
+                    <a class="emergency-contact-number" href="tel:100">100</a>
+                    <span class="emergency-contact-label">For emergencies, 112 is the unified number</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">🚒</div>
+                    <h4>Fire &amp; Rescue</h4>
+                    <p>Fire incidents, rescue operations and urgent hazards.</p>
+                    <a class="emergency-contact-number" href="tel:101">101</a>
+                    <span class="emergency-contact-label">Fire and rescue service</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">🚑</div>
+                    <h4>Ambulance</h4>
+                    <p>Medical emergencies requiring urgent ambulance assistance.</p>
+                    <a class="emergency-contact-number" href="tel:108">108</a>
+                    <span class="emergency-contact-label">Ambulance service</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">🏥</div>
+                    <h4>National Ambulance Service</h4>
+                    <p>Ambulance and patient transport services in participating areas.</p>
+                    <a class="emergency-contact-number" href="tel:102">102</a>
+                    <span class="emergency-contact-label">Service availability varies by area</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">👩</div>
+                    <h4>Women Helpline</h4>
+                    <p>Support for women experiencing violence or distress.</p>
+                    <a class="emergency-contact-number" href="tel:181">181</a>
+                    <span class="emergency-contact-label">Women in distress</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">🧒</div>
+                    <h4>Child Helpline</h4>
+                    <p>Help for children who need protection, care or assistance.</p>
+                    <a class="emergency-contact-number" href="tel:1098">1098</a>
+                    <span class="emergency-contact-label">Child protection assistance</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">💻</div>
+                    <h4>Cybercrime Helpline</h4>
+                    <p>Report cyber financial fraud and seek assistance.</p>
+                    <a class="emergency-contact-number" href="tel:1930">1930</a>
+                    <span class="emergency-contact-label">Cyber financial fraud</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">🧠</div>
+                    <h4>Tele-MANAS</h4>
+                    <p>National mental health support and guidance.</p>
+                    <a class="emergency-contact-number" href="tel:14416">14416</a>
+                    <span class="emergency-contact-label">Mental health support</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">🛡️</div>
+                    <h4>Anti-Ragging Helpline</h4>
+                    <p>Report ragging in educational institutions.</p>
+                    <a class="emergency-contact-number" href="tel:18001805522">1800-180-5522</a>
+                    <span class="emergency-contact-label">National anti-ragging helpline</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">👵</div>
+                    <h4>Elderline</h4>
+                    <p>Support for senior citizens needing assistance.</p>
+                    <a class="emergency-contact-number" href="tel:14567">14567</a>
+                    <span class="emergency-contact-label">Senior citizen helpline</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">🚆</div>
+                    <h4>Railway Enquiry &amp; Assistance</h4>
+                    <p>Railway-related assistance and enquiries.</p>
+                    <a class="emergency-contact-number" href="tel:139">139</a>
+                    <span class="emergency-contact-label">Railway helpline</span>
+                </article>
+
+            </div>
+        </div>
+
+        <!-- LOCAL POLICE -->
+        <div class="emergency-contact-group">
+            <h3>👮 Local Police — Thalassery</h3>
+
+            <div class="emergency-contact-grid">
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">👮</div>
+                    <h4>Thalassery Police Station</h4>
+                    <p>Local police station serving Thalassery.</p>
+                    <a class="emergency-contact-number" href="tel:04902323352">
+                        0490-2323352
+                    </a>
+                    <span class="emergency-contact-label">Verify this local number before relying on it</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">🚦</div>
+                    <h4>Thalassery Traffic Police</h4>
+                    <p>Local traffic-related enquiries and assistance.</p>
+                    <a class="emergency-contact-number" href="tel:04902327466">
+                        0490-2327466
+                    </a>
+                    <span class="emergency-contact-label">Verify this local number before relying on it</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">📞</div>
+                    <h4>Kerala Police Emergency</h4>
+                    <p>For immediate danger, threats or urgent police assistance.</p>
+                    <a class="emergency-contact-number" href="tel:112">112</a>
+                    <span class="emergency-contact-label">Statewide emergency response</span>
+                </article>
+
+            </div>
+        </div>
+
+        <!-- FIRE AND RESCUE -->
+        <div class="emergency-contact-group">
+            <h3>🚒 Fire &amp; Rescue Services</h3>
+
+            <div class="emergency-contact-grid">
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">🚒</div>
+                    <h4>Fire &amp; Rescue Station, Thalassery</h4>
+                    <p>Local fire and rescue station.</p>
+                    <a class="emergency-contact-number" href="tel:04902344101">
+                        0490-2344101
+                    </a>
+                    <span class="emergency-contact-label">Verify this local number before relying on it</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">🔥</div>
+                    <h4>Kerala Fire &amp; Rescue Emergency</h4>
+                    <p>For fires, rescue operations and urgent hazards.</p>
+                    <a class="emergency-contact-number" href="tel:101">101</a>
+                    <span class="emergency-contact-label">Fire and rescue helpline</span>
+                </article>
+
+            </div>
+        </div>
+
+        <!-- LOCAL HOSPITALS -->
+        <div class="emergency-contact-group">
+            <h3>🏥 Hospitals — Thalassery</h3>
+
+            <div class="emergency-contact-grid">
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">🏥</div>
+                    <h4>General Hospital, Thalassery</h4>
+                    <p>Government hospital in Thalassery.</p>
+                    <a class="emergency-contact-number" href="tel:04902327450">
+                        0490-2327450
+                    </a>
+                    <span class="emergency-contact-label">Verify this local number before relying on it</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">🏥</div>
+                    <h4>Josgiri Hospital</h4>
+                    <p>Hospital in the Thalassery area.</p>
+                    <a class="emergency-contact-number" href="tel:04902341130">
+                        0490-2341130
+                    </a>
+                    <span class="emergency-contact-label">Verify this local number before relying on it</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">🏥</div>
+                    <h4>Indira Gandhi Co-operative Hospital</h4>
+                    <p>Hospital in Manjodi, Thalassery.</p>
+                    <a class="emergency-contact-number" href="tel:04902328500">
+                        0490-2328500
+                    </a>
+                    <span class="emergency-contact-label">Verify this local number before relying on it</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">❤️</div>
+                    <h4>Indiana TMH Cardiac Centre</h4>
+                    <p>Cardiac care centre in Thalassery.</p>
+                    <a class="emergency-contact-number" href="tel:04902323880">
+                        0490-2323880
+                    </a>
+                    <span class="emergency-contact-label">Verify this local number before relying on it</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">🎗️</div>
+                    <h4>Malabar Cancer Centre</h4>
+                    <p>Specialist cancer care centre near Thalassery.</p>
+                    <a class="emergency-contact-number" href="tel:04902355881">
+                        0490-2355881
+                    </a>
+                    <span class="emergency-contact-label">Verify this local number before relying on it</span>
+                </article>
+
+            </div>
+        </div>
+
+        <!-- AMBULANCE SERVICES -->
+        <div class="emergency-contact-group">
+            <h3>🚑 Ambulance Services</h3>
+
+            <div class="emergency-contact-grid">
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">🚑</div>
+                    <h4>National Emergency Response</h4>
+                    <p>For urgent medical assistance when you need emergency services.</p>
+                    <a class="emergency-contact-number" href="tel:112">112</a>
+                    <span class="emergency-contact-label">Unified emergency number</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">🚑</div>
+                    <h4>Ambulance Service</h4>
+                    <p>Ambulance assistance for medical emergencies.</p>
+                    <a class="emergency-contact-number" href="tel:108">108</a>
+                    <span class="emergency-contact-label">Emergency ambulance helpline</span>
+                </article>
+
+                <article class="emergency-contact-card">
+                    <div class="emergency-contact-icon">🚑</div>
+                    <h4>Karunnya Ambulance, Thalassery</h4>
+                    <p>Local ambulance service listed in the Thalassery area.</p>
+                    <a class="emergency-contact-number" href="tel:09645108108">
+                        096451 08108
+                    </a>
+                    <span class="emergency-contact-label">Verify this local number before relying on it</span>
+                </article>
+
+            </div>
+        </div>
+
+        <div class="emergency-contact-note">
+            <strong>Important:</strong>
+            National helpline numbers are intended to connect you with the
+            relevant service, but availability and scope can vary. Local
+            hospital and ambulance numbers should be verified periodically.
+            If someone is in immediate danger, call 112 rather than relying
+            on this website or waiting for a response through ASVP.
+        </div>
+
+    </section>
+    <!-- END NEW EMERGENCY CONTACT DIRECTORY -->
 
 </main>
 
